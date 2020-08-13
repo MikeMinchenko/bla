@@ -1,11 +1,11 @@
 'use strict';
 // проверка на число
-let isNumber = function (n) {
+let isNumber = function(n) {
 	return !isNaN(parseFloat(n)) && isFinite(n);
 };
 // задаем вопрос про месячный доход
 let money,
-	start = function () {
+	start = function() {
 		do {
 			money = prompt('Ваш месячный доход?');
 		} while (!isNumber(money));
@@ -24,7 +24,7 @@ let income = 'фриланс',
 	budgetDay;
 
 // функция подсчета обязательных расходов
-let getExpensesMonth = function () {
+let getExpensesMonth = function() {
 	let sumData;
 	let sum = 0;
 	for (let i = 0; i < 2; i++) {
@@ -40,12 +40,12 @@ let getExpensesMonth = function () {
 };
 
 // подсчет остатка за месяц
-let getAccumulatedMonth = function () {
+let getAccumulatedMonth = function() {
 	return money - expensesAmounth;
 };
 
 // подсчет за сколько будет достигнута цель
-let getTargetMonth = function () {
+let getTargetMonth = function() {
 	let targetMonthResult = Math.ceil(mission / accumulatedMonth);
 	if (targetMonthResult <= 0) {
 		return 'Цель не будет достигнута';
@@ -55,12 +55,12 @@ let getTargetMonth = function () {
 };
 
 // функция типа данных
-let showTypeOf = function (data) {
+let showTypeOf = function(data) {
 	return typeof data;
 };
 
 // подсчет уровня дохода
-let getStatusIncome = function () {
+let getStatusIncome = function() {
 	if (budgetDay >= 1200) {
 		return 'У вас высокий уровень дохода';
 	} else if (600 <= budgetDay && budgetDay < 1200) {
