@@ -26,13 +26,13 @@ let result = function() {
 			} else if (!isNumber(userNumber)) {
 				alert('Введи число!');
 				guessNumber();
-			} else if (userNumber < botNumber) {
-				counter--;
-				alert(`Загаданное число меньше, осталось попыток ${counter}`);
-				guessNumber();
 			} else if (userNumber > botNumber) {
 				counter--;
 				alert(`Загаданное число меньше, осталось попыток ${counter}`);
+				guessNumber();
+			} else if (userNumber < botNumber) {
+				counter--;
+				alert(`Загаданное число больше, осталось попыток ${counter}`);
 				guessNumber();
 			} else if (+userNumber === botNumber) {
 				let again = confirm('Поздравляю, Вы угадали!!! Хотели бы сыграть еще?');
