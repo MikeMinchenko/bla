@@ -48,11 +48,12 @@ let appData = {
 		do {
 			appData.addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
 		} while (isText(appData.addExpenses));
-		appData.addExpenses = appData.addExpenses.toLowerCase().split(', ');
+		appData.addExpenses = appData.addExpenses.toLowerCase().split(',');
 		appData.deposit = confirm('Есть ли у вас депозит в банке ?');
 		for (let i = 0; i < 2; i++) {
-			costItem = prompt('Введите обязательную статью расходов?');
-
+			do {
+				costItem = prompt('Введите обязательную статью расходов?');
+			} while (isText(costItem));
 			do {
 				sumData = prompt('Во сколько это обойдется?');
 			} while (!isNumber(sumData));
@@ -115,8 +116,20 @@ appData.getStatusIncome();
 appData.getInfoDeposit();
 appData.calcSaveMoney();
 
+let bigLetter = function() {
+	let newAddExpenses = [],
+		word;
+	for (let i = 0; i < appData.addExpenses.length; i++) {
+		word = appData.addExpenses[i].toString();
+		word = word[0].toUpperCase() + word.slice(1);
+
+		newAddExpenses.push(word);
+	}
+	return newAddExpenses.join(', ');
+};
+
 // вывод в консоль
-console.log(appData.addExpenses.toUpperCase().join(', '));
+console.log(bigLetter());
 console.log('Расходы за месяц: ' + appData.expensesMonth);
 console.log(appData.getTargetMonth());
 console.log(appData.getStatusIncome());
