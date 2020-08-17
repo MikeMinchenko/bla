@@ -116,7 +116,7 @@ appData.getInfoDeposit();
 appData.calcSaveMoney();
 
 // вывод в консоль
-console.log(appData.addExpenses.join(', '));
+console.log(appData.addExpenses.toUpperCase().join(', '));
 console.log('Расходы за месяц: ' + appData.expensesMonth);
 console.log(appData.getTargetMonth());
 console.log(appData.getStatusIncome());
