@@ -1,6 +1,6 @@
 'use strict';
 // вариант a
-let clock = function () {
+let clockA = function () {
   let date = new Date(),
     days = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
     months = ['Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июля', 'Августа', 'Сенятбря', 'Октября', 'Ноября', 'Декабря'],
@@ -39,15 +39,15 @@ let clock = function () {
     secondsName = 'секунд';
   }
   // выводим на экран
-  document.getElementById('clock').innerHTML = `Сегодня ${day}, ${dayOfMonth} ${month} ${year} года, ${hours} ${oClock} ${minutes} ${minutesName} ${seconds} ${secondsName}`;
+  document.getElementById('clock_a').innerHTML = `Сегодня ${day}, ${dayOfMonth} ${month} ${year} года, ${hours} ${oClock} ${minutes} ${minutesName} ${seconds} ${secondsName}`;
 
 };
-setInterval(clock, 1000);
-clock();
+setInterval(clockA, 1000);
+clockA();
 
 // вариант b
 
-/*let clock = function () {
+let clockB = function () {
   let date = new Date(),
 
     hours = (date.getHours() < 10) ? '0' + date.getHours() : date.getHours(),
@@ -56,8 +56,8 @@ clock();
     year = date.getFullYear(),
     month = (date.getMonth() < 10) ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1),
     day = (date.getDate() < 10) ? '0' + date.getDate() : date.getDate();
-  document.getElementById('clock').innerHTML = `${day}.${month}.${year} - ${hours}:${minutes}:${seconds}`;
+  document.getElementById('clock_b').innerHTML = `${day}.${month}.${year} - ${hours}:${minutes}:${seconds}`;
   console.log(date.getMonth());
 };
-setInterval(clock, 1000);
-clock(); */
+setInterval(clockB, 1000);
+clockB();
