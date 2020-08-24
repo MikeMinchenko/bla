@@ -56,6 +56,7 @@ let appData = {
 		if (salaryAmount.value === '') {
 			return;
 		}
+		textInputs = document.querySelectorAll('[type="text"]');
 		textInputs.forEach(function (item) {
 			item.setAttribute("disabled", "true");
 		});
