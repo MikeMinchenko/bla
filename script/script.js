@@ -258,6 +258,7 @@ let appData = {
 		periodRange.removeAttribute("disabled");
 		periodRange.value = 1;
 		periodАmount.textContent = periodRange.value;
+		this.budgetMonth = '';
 		incomeItems.forEach(function (item) {
 			incomeItems = document.querySelectorAll('.income-items');
 			if (incomeItems.length > 1) {
