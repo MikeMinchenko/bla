@@ -52,6 +52,22 @@ let appData = {
 	expensesMonth: 0,
 	incomeMonth: 0,
 	start: function () {
+
+		if (salaryAmount.value === '') {
+			return;
+		}
+		textInputs.forEach(function (item) {
+			item.setAttribute("disabled", "true");
+		});
+		calculationButton.style.display = 'none';
+		resetBtn.style.display = 'block';
+		incomeButton.setAttribute("disabled", "true");
+		expensesButton.setAttribute("disabled", "true");
+		periodRange.setAttribute("disabled", "true");
+
+
+
+
 		this.budget = +salaryAmount.value;
 
 		this.getExpenses();
@@ -228,6 +244,35 @@ let appData = {
 			item.addEventListener('input', isText);
 		});
 
+	},
+	reset: function () {
+		textInputs.forEach(function (item) {
+			item.removeAttribute("disabled");
+			item.value = '';
+		});
+		calculationButton.style.display = 'block';
+		resetBtn.style.display = 'none';
+		incomeButton.removeAttribute("disabled");
+		expensesButton.removeAttribute("disabled");
+		periodRange.removeAttribute("disabled");
+		incomeItems.forEach(function (item) {
+			incomeItems = document.querySelectorAll('.income-items');
+			if (incomeItems.length > 1) {
+				item.remove();
+			} else if (incomeItems.length < 3) {
+				incomeButton.style.display = 'block';
+			}
+
+		});
+		expensesItems.forEach(function (item) {
+			expensesItems = document.querySelectorAll('.expenses-items');
+			if (expensesItems.length > 1) {
+				item.remove();
+			} else if (expensesItems.length < 3) {
+				incomeButton.style.display = 'block';
+			}
+		});
+
 	}
 
 };
@@ -240,18 +285,5 @@ periodRange.addEventListener('input', function () {
 });
 incomeButton.addEventListener('click', appData.addIncomeBlock);
 expensesButton.addEventListener('click', appData.addExpensesBlock);
-calculationButton.addEventListener('click', function () {
-	if (salaryAmount.value === '') {
-		return;
-	} else {
-		appData.start();
-	}
-	textInputs.forEach(function (item) {
-		item.setAttribute("disabled", "true");
-	});
-	calculationButton.style.display = 'none';
-	resetBtn.style.display = 'block';
-});
-resetBtn.addEventListener('click', function () {
-	window.location.reload(true);
-});
+calculationButton.addEventListener('click', appData.start.bind(appData));
+resetBtn.addEventListener('click', appData.reset.bind(appData));
