@@ -255,6 +255,8 @@ let appData = {
 		incomeButton.removeAttribute("disabled");
 		expensesButton.removeAttribute("disabled");
 		periodRange.removeAttribute("disabled");
+		periodRange.value = 1;
+		periodАmount.textContent = periodRange.value;
 		incomeItems.forEach(function (item) {
 			incomeItems = document.querySelectorAll('.income-items');
 			if (incomeItems.length > 1) {
