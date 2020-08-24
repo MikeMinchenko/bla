@@ -187,7 +187,7 @@ let appData = {
 	},
 	// подсчет бюджета на день и месяц
 	getBudget: function () {
-		this.budgetMonth = this.budget - this.expensesMonth + this.incomeMonth;
+		this.budgetMonth = (this.budget - this.expensesMonth) + this.incomeMonth;
 		this.budgetDay = Math.floor(this.budgetMonth / 30);
 
 	},
@@ -259,6 +259,17 @@ let appData = {
 		periodRange.value = 1;
 		periodАmount.textContent = periodRange.value;
 		this.budgetMonth = '';
+		this.income = {};
+		this.addIncome = [];
+		this.expenses = {};
+		this.addExpenses = [];
+		this.deposit = false;
+		this.percentDeposit = 0;
+		this.moneyDeposit = 0;
+		this.budget = 0;
+		this.budgetDay = 0;
+		this.expensesMonth = 0;
+		this.incomeMonth = 0;
 		incomeItems.forEach(function (item) {
 			incomeItems = document.querySelectorAll('.income-items');
 			if (incomeItems.length > 1) {
