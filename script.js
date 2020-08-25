@@ -28,7 +28,6 @@ class DomElement {
     });
     window.addEventListener("keydown", function (event) {
       let elem = document.querySelector('.block');
-      console.log(elem);
       let elemStyle = getComputedStyle(elem);
       if (event.key === 'ArrowUp') {
         elem.style.top = (parseFloat(elemStyle.top) - 10) + 'px';
@@ -44,5 +43,5 @@ class DomElement {
 
 }
 
-let domElement = new DomElement('#block', '150px', '150px', 'grey', 'absolute');
+let domElement = new DomElement('.block', '150px', '150px', 'grey', 'absolute');
 domElement.eventListeners();
