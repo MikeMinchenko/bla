@@ -38,20 +38,22 @@ let isText = function (event) {
 //   return /[0-9]/g.test(value) || !isNaN(value);
 // };
 
-let appData = {
-	income: {},
-	addIncome: [],
-	expenses: {},
-	addExpenses: [],
-	deposit: false,
-	percentDeposit: 0,
-	moneyDeposit: 0,
-	budget: 0,
-	budgetDay: 0,
-	budgetMonth: 0,
-	expensesMonth: 0,
-	incomeMonth: 0,
-	start: function () {
+class AppData {
+	constructor() {
+		this.income = {};
+		this.addIncome = [];
+		this.expenses = {};
+		this.addExpenses = [];
+		this.deposit = false;
+		this.percentDeposit = 0;
+		this.moneyDeposit = 0;
+		this.budget = 0;
+		this.budgetDay = 0;
+		this.budgetMonth = 0;
+		this.expensesMonth = 0;
+		this.incomeMonth = 0;
+	}
+	start() {
 
 		if (salaryAmount.value === '') {
 			return;
@@ -66,9 +68,6 @@ let appData = {
 		expensesButton.setAttribute("disabled", "true");
 		periodRange.setAttribute("disabled", "true");
 
-
-
-
 		this.budget = +salaryAmount.value;
 
 		this.getExpenses();
@@ -79,13 +78,11 @@ let appData = {
 		this.getAddExpenses();
 		this.getAddIncome();
 
-		// this.getStatusIncome();
-		// this.getInfoDeposit();
-		// this.calcSaveMoney();
 		this.showResult();
-	},
+	}
 	// показываем результат
-	showResult: function () {
+	showResult() {
+		const _this = this;
 		budgetMonthValue.value = this.budgetMonth;
 		budgetDayValue.value = this.budgetDay;
 		expensesMonthValue.value = this.expensesMonth;
@@ -94,105 +91,112 @@ let appData = {
 		targetMonthValue.value = this.getTargetMonth();
 		incomePeriodValue.value = this.calcSaveMoney();
 		periodRange.addEventListener('input', function () {
-			incomePeriodValue.value = appData.calcSaveMoney();
+			incomePeriodValue.value = _this.calcSaveMoney();
 		});
-
-	},
+	}
 	// добавляем блок с дополнительным доходом
-	addIncomeBlock: function () {
+	addIncomeBlock() {
+
 		let cloneIncomeItem = incomeItems[0].cloneNode(true);
 		cloneIncomeItem.querySelector('.income-title').value = '';
 		cloneIncomeItem.querySelector('.income-amount').value = '';
 		incomeButton.before(cloneIncomeItem);
 		incomeItems = document.querySelectorAll('.income-items');
-		appData.validation();
+		this.validation();
 		if (incomeItems.length === 3) {
 			incomeButton.style.display = 'none';
 		}
 
-	},
+	}
 	// добавляем блок с обязательными расходами
-	addExpensesBlock: function () {
+	addExpensesBlock() {
+
 		let cloneExpensesItem = expensesItems[0].cloneNode(true);
 		cloneExpensesItem.querySelector('.expenses-title').value = '';
 		cloneExpensesItem.querySelector('.expenses-amount').value = '';
 		expensesButton.before(cloneExpensesItem);
 		expensesItems = document.querySelectorAll('.expenses-items');
-		appData.validation();
+		this.validation();
 
 		if (expensesItems.length === 3) {
 			expensesButton.style.display = 'none';
 		}
 
-	},
+	}
 	// добавляем значения в обьект с обязательными расходами
-	getExpenses: function () {
+	getExpenses() {
+		const _this = this;
 		expensesItems = document.querySelectorAll('.expenses-items');
 		expensesItems.forEach(function (item) {
 			let itemExpenses = item.querySelector('.expenses-title').value,
 				cashExpenses = item.querySelector('.expenses-amount').value;
-			appData.validation();
+			_this.validation();
 			if (itemExpenses !== '' && cashExpenses !== '') {
-				appData.expenses[itemExpenses] = +cashExpenses;
+				_this.expenses[itemExpenses] = +cashExpenses;
 			}
 		});
 
-	},
+	}
 	// добавляем значения в обьект с Дополнительными доходами
-	getIncome: function () {
+	getIncome() {
+		const _this = this;
 		incomeItems = document.querySelectorAll('.income-items');
 		incomeItems.forEach(function (item) {
 			let itemIncome = item.querySelector('.income-title').value,
 				cashIncome = item.querySelector('.income-amount').value;
-			appData.validation();
+			_this.validation();
 			if (itemIncome !== '' && cashIncome !== '') {
-				appData.income[itemIncome] = +cashIncome;
+				_this.income[itemIncome] = +cashIncome;
 			}
 		});
 
-	},
+	}
 	// вычисляем значения возможных расходов
-	getAddExpenses: function () {
+	getAddExpenses() {
+		const _this = this;
 		let addExpenses = additionalExpensesItem.value.split(',');
 		addExpenses.forEach(function (item) {
 			item = item.trim();
 			if (item !== '') {
-				appData.addExpenses.push(item);
+				_this.addExpenses.push(item);
 			}
 		});
 
-	},
+	}
 	// вычисляем значения Дополнительных доходов
-	getAddIncome: function () {
+	getAddIncome() {
+		const _this = this;
 		additionalIncomeItem.forEach(function (item) {
 			let itemValue = item.value.trim();
 			if (itemValue !== '') {
-				appData.addIncome.push(itemValue);
+				_this.addIncome.push(itemValue);
 			}
 		});
 
-	},
+	}
 	// сумма обязательных расходов
-	getExpensesMonth: function () {
+	getExpensesMonth() {
+		const _this = this;
 		for (let key in this.expenses) {
-			appData.expensesMonth += appData.expenses[key];
+			_this.expensesMonth += _this.expenses[key];
 		}
 
-	},
+	}
 	// сумма дополнительных доходов
-	getIncomeMonth: function () {
+	getIncomeMonth() {
+		const _this = this;
 		for (let key in this.income) {
-			appData.incomeMonth += appData.income[key];
+			_this.incomeMonth += _this.income[key];
 		}
-	},
+	}
 	// подсчет бюджета на день и месяц
-	getBudget: function () {
+	getBudget() {
 		this.budgetMonth = (this.budget - this.expensesMonth) + this.incomeMonth;
 		this.budgetDay = Math.floor(this.budgetMonth / 30);
 
-	},
+	}
 	// подсчет за сколько будет достигнута цель
-	getTargetMonth: function () {
+	getTargetMonth() {
 		let targetMonthResult = Math.ceil(targetAmount.value / this.budgetMonth);
 		if (targetMonthResult <= 0) {
 			return 'Цель не будет достигнута';
@@ -200,9 +204,9 @@ let appData = {
 
 		return targetMonthResult;
 
-	},
+	}
 	// подсчет уровня дохода
-	getStatusIncome: function () {
+	getStatusIncome() {
 		if (this.budgetDay >= 1200) {
 			return 'У вас высокий уровень дохода';
 		} else if (600 <= this.budgetDay && this.budgetDay < 1200) {
@@ -213,24 +217,25 @@ let appData = {
 			return 'Что то пошло не так';
 		}
 
-	},
-	getInfoDeposit: function () {
+	}
+	getInfoDeposit() {
+		const _this = this;
 		if (this.deposit) {
 			do {
-				appData.percentDeposit = prompt('Какой у Вас процент?');
+				_this.percentDeposit = prompt('Какой у Вас процент?');
 			} while (!isNumber(this.percentDeposit));
 			do {
-				appData.moneyDeposit = prompt('Какая сумма заложена?');
+				_this.moneyDeposit = prompt('Какая сумма заложена?');
 			} while (!isNumber(this.moneyDeposit));
 		}
 
-	},
-	calcSaveMoney: function () {
+	}
+	calcSaveMoney() {
 
 		return this.budgetMonth * periodRange.value;
-	},
+	}
 	// функция валидации полей ввода
-	validation: function () {
+	validation() {
 		let sumPlaceholders = document.querySelectorAll('[placeholder="Сумма"]'),
 			textPlaceholders = document.querySelectorAll('[placeholder="Наименование"]'),
 			namePlaceholder = document.querySelectorAll('[placeholder="название"]');
@@ -245,8 +250,8 @@ let appData = {
 			item.addEventListener('input', isText);
 		});
 
-	},
-	reset: function () {
+	}
+	reset() {
 		textInputs.forEach(function (item) {
 			item.removeAttribute("disabled");
 			item.value = '';
@@ -289,16 +294,20 @@ let appData = {
 		});
 
 	}
+	// слушатели событий
+	eventListeners() {
+		const _this = this;
+		periodRange.addEventListener('input', function () {
+			periodАmount.textContent = periodRange.value;
+		});
+		incomeButton.addEventListener('click', _this.addIncomeBlock.bind(_this));
+		expensesButton.addEventListener('click', _this.addExpensesBlock.bind(_this));
+		calculationButton.addEventListener('click', _this.start.bind(_this));
+		resetBtn.addEventListener('click', _this.reset.bind(_this));
+	}
+}
 
-};
 
+let appData = new AppData();
 appData.validation();
-
-// слушатели событий
-periodRange.addEventListener('input', function () {
-	periodАmount.textContent = periodRange.value;
-});
-incomeButton.addEventListener('click', appData.addIncomeBlock);
-expensesButton.addEventListener('click', appData.addExpensesBlock);
-calculationButton.addEventListener('click', appData.start.bind(appData));
-resetBtn.addEventListener('click', appData.reset.bind(appData));
+appData.eventListeners();
