@@ -12,10 +12,10 @@ class DomElement {
     let elem;
     if (this.selector[0] === '.') {
       elem = document.createElement('div');
-      elem.classList.add(this.selector);
+      elem.classList.add(this.selector.slice(1));
     } else if (this.selector[0] === '#') {
       elem = document.createElement('p');
-      elem.classList.add(this.selector);
+      elem.setAttribute('id', `${this.selector.slice(1)}`);
     }
     elem.style.cssText = `height: ${this.height}; width:${this.width}; background:${this.bg}; font-Size:${this.fontSize};`;
     elem.textContent = prompt('Введите Ваш текст сюда');
