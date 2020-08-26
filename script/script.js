@@ -1,6 +1,6 @@
 'use strict';
 
-let calculationButton = document.getElementById('start'),
+const calculationButton = document.getElementById('start'),
 	resetBtn = document.getElementById('cancel'),
 	incomeButton = document.getElementsByTagName('button')[0],
 	expensesButton = document.getElementsByTagName('button')[1],
@@ -15,12 +15,12 @@ let calculationButton = document.getElementById('start'),
 	incomePeriodValue = value[5],
 	targetMonthValue = value[6],
 	salaryAmount = document.querySelector('.salary-amount'),
-	incomeItems = document.querySelectorAll('.income-items'),
 	additionalIncomeItem = document.querySelectorAll('.additional_income-item'),
-	expensesItems = document.querySelectorAll('.expenses-items'),
 	targetAmount = document.querySelector('.target-amount'),
 	periodRange = document.querySelector('[type="range"]'),
-	periodАmount = document.querySelector('.period-amount'),
+	periodАmount = document.querySelector('.period-amount');
+let incomeItems = document.querySelectorAll('.income-items'),
+	expensesItems = document.querySelectorAll('.expenses-items'),
 	textInputs = document.querySelectorAll('[type="text"]');
 
 // проверка на число
@@ -97,7 +97,7 @@ class AppData {
 	// добавляем блок с дополнительным доходом
 	addIncomeBlock() {
 
-		let cloneIncomeItem = incomeItems[0].cloneNode(true);
+		const cloneIncomeItem = incomeItems[0].cloneNode(true);
 		cloneIncomeItem.querySelector('.income-title').value = '';
 		cloneIncomeItem.querySelector('.income-amount').value = '';
 		incomeButton.before(cloneIncomeItem);
@@ -111,7 +111,7 @@ class AppData {
 	// добавляем блок с обязательными расходами
 	addExpensesBlock() {
 
-		let cloneExpensesItem = expensesItems[0].cloneNode(true);
+		const cloneExpensesItem = expensesItems[0].cloneNode(true);
 		cloneExpensesItem.querySelector('.expenses-title').value = '';
 		cloneExpensesItem.querySelector('.expenses-amount').value = '';
 		expensesButton.before(cloneExpensesItem);
@@ -126,7 +126,7 @@ class AppData {
 	// добавляем значения в обьект с обязательными расходами
 	getExpenses() {
 		const _this = this;
-		expensesItems = document.querySelectorAll('.expenses-items');
+		const expensesItems = document.querySelectorAll('.expenses-items');
 		expensesItems.forEach(function (item) {
 			let itemExpenses = item.querySelector('.expenses-title').value,
 				cashExpenses = item.querySelector('.expenses-amount').value;
@@ -140,7 +140,7 @@ class AppData {
 	// добавляем значения в обьект с Дополнительными доходами
 	getIncome() {
 		const _this = this;
-		incomeItems = document.querySelectorAll('.income-items');
+		const incomeItems = document.querySelectorAll('.income-items');
 		incomeItems.forEach(function (item) {
 			let itemIncome = item.querySelector('.income-title').value,
 				cashIncome = item.querySelector('.income-amount').value;
@@ -154,7 +154,7 @@ class AppData {
 	// вычисляем значения возможных расходов
 	getAddExpenses() {
 		const _this = this;
-		let addExpenses = additionalExpensesItem.value.split(',');
+		const addExpenses = additionalExpensesItem.value.split(',');
 		addExpenses.forEach(function (item) {
 			item = item.trim();
 			if (item !== '') {
@@ -177,7 +177,7 @@ class AppData {
 	// сумма обязательных расходов
 	getExpensesMonth() {
 		const _this = this;
-		for (let key in this.expenses) {
+		for (const key in this.expenses) {
 			_this.expensesMonth += _this.expenses[key];
 		}
 
@@ -185,7 +185,7 @@ class AppData {
 	// сумма дополнительных доходов
 	getIncomeMonth() {
 		const _this = this;
-		for (let key in this.income) {
+		for (const key in this.income) {
 			_this.incomeMonth += _this.income[key];
 		}
 	}
@@ -197,7 +197,7 @@ class AppData {
 	}
 	// подсчет за сколько будет достигнута цель
 	getTargetMonth() {
-		let targetMonthResult = Math.ceil(targetAmount.value / this.budgetMonth);
+		const targetMonthResult = Math.ceil(targetAmount.value / this.budgetMonth);
 		if (targetMonthResult <= 0) {
 			return 'Цель не будет достигнута';
 		}
@@ -236,7 +236,7 @@ class AppData {
 	}
 	// функция валидации полей ввода
 	validation() {
-		let sumPlaceholders = document.querySelectorAll('[placeholder="Сумма"]'),
+		const sumPlaceholders = document.querySelectorAll('[placeholder="Сумма"]'),
 			textPlaceholders = document.querySelectorAll('[placeholder="Наименование"]'),
 			namePlaceholder = document.querySelectorAll('[placeholder="название"]');
 
@@ -308,6 +308,6 @@ class AppData {
 }
 
 
-let appData = new AppData();
+const appData = new AppData();
 appData.validation();
 appData.eventListeners();
