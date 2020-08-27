@@ -18,7 +18,12 @@ const calculationButton = document.getElementById('start'),
 	additionalIncomeItem = document.querySelectorAll('.additional_income-item'),
 	targetAmount = document.querySelector('.target-amount'),
 	periodRange = document.querySelector('[type="range"]'),
-	periodАmount = document.querySelector('.period-amount');
+	periodАmount = document.querySelector('.period-amount'),
+	checkInput = document.querySelector('#deposit-check'),
+	depositBank = document.querySelector('.deposit-bank'),
+	depositAmount = document.querySelector('.deposit-amount'),
+	depositPercent = document.querySelector('.deposit-percent');
+
 
 let incomeItems = document.querySelectorAll('.income-items'),
 	expensesItems = document.querySelectorAll('.expenses-items'),
@@ -72,6 +77,8 @@ class AppData {
 		resetBtn.style.display = 'block';
 		incomeButton.setAttribute("disabled", "true");
 		expensesButton.setAttribute("disabled", "true");
+		checkInput.setAttribute("disabled", "true");
+		depositBank.setAttribute("disabled", "true");
 
 
 		this.budget = +salaryAmount.value;
@@ -79,6 +86,7 @@ class AppData {
 		this.getInExp();
 		this.getExpensesMonth();
 		this.getIncomeMonth();
+		this.getInfoDeposit();
 		this.getBudget();
 		this.getAddInExp();
 
@@ -177,7 +185,8 @@ class AppData {
 
 	// подсчет бюджета на день и месяц
 	getBudget() {
-		this.budgetMonth = (this.budget - this.expensesMonth) + this.incomeMonth;
+		const monthDeposit = this.percentDeposit * (this.moneyDeposit / 100);
+		this.budgetMonth = (this.budget - this.expensesMonth) + this.incomeMonth + monthDeposit;
 		this.budgetDay = Math.floor(this.budgetMonth / 30);
 
 	}
@@ -206,16 +215,56 @@ class AppData {
 		}
 
 	}
-
+	// меняем процент в зависимости от банка
+	chandgePercent() {
+		const selectValue = this.value;
+		if (selectValue === 'other') {
+			depositPercent.style.display = 'inline-block';
+			depositPercent.removeAttribute('disabled');
+			depositPercent.value = '';
+		} else {
+			depositPercent.style.display = 'none';
+			depositPercent.value = selectValue;
+		}
+	}
+	//  получаем данные от пользователя по процентам и вкладу
 	getInfoDeposit() {
 
 		if (this.deposit) {
-			do {
-				this.percentDeposit = prompt('Какой у Вас процент?');
-			} while (!this.isNumber(this.percentDeposit));
-			do {
-				this.moneyDeposit = prompt('Какая сумма заложена?');
-			} while (!this.isNumber(this.moneyDeposit));
+			this.percentDeposit = depositPercent.value;
+			this.moneyDeposit = depositAmount.value;
+		}
+
+	}
+	// действия при input.checked
+	depositHandler() {
+		if (checkInput.checked) {
+			depositBank.style.display = 'inline-block';
+			depositAmount.style.display = 'inline-block';
+			this.deposit = true;
+			this.validation();
+			depositBank.addEventListener('change', this.chandgePercent);
+			depositPercent.addEventListener('input', this.isNumber);
+			depositPercent.addEventListener('input', () => {
+				if (depositPercent.value > 100 || depositPercent.value < 1) {
+					depositPercent.value = '';
+				}
+			});
+
+		} else {
+			depositBank.style.display = 'none';
+			depositAmount.style.display = 'none';
+			depositBank.value = '0';
+			depositAmount.value = '';
+			this.deposit = false;
+			depositPercent.value = '';
+			depositBank.removeEventListener('change', this.chandgePercent);
+			depositPercent.removeEventListener('input', this.isNumber);
+			depositPercent.removeEventListener('input', () => {
+				if (depositPercent.value > 100 || depositPercent.value < 1) {
+					depositPercent.value = '';
+				}
+			});
 		}
 
 	}
@@ -252,6 +301,8 @@ class AppData {
 		resetBtn.style.display = 'none';
 		incomeButton.removeAttribute("disabled");
 		expensesButton.removeAttribute("disabled");
+		checkInput.removeAttribute("disabled");
+		depositBank.removeAttribute("disabled");
 		periodRange.value = 1;
 		periodАmount.textContent = periodRange.value;
 		this.budgetMonth = '';
@@ -284,6 +335,9 @@ class AppData {
 			}
 		});
 
+		checkInput.checked = false;
+		this.depositHandler();
+
 	}
 
 	// слушатели событий
@@ -302,6 +356,7 @@ class AppData {
 
 		calculationButton.addEventListener('click', this.start.bind(this));
 		resetBtn.addEventListener('click', this.reset.bind(this));
+		checkInput.addEventListener('change', this.depositHandler.bind(this))
 	}
 }
 
