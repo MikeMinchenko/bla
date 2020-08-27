@@ -55,6 +55,93 @@ class AppData {
 		this.incomeMonth = 0;
 
 	}
+
+	// получить Cookies
+	getCookie(name) {
+		let matches = document.cookie.match(new RegExp(
+			"(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+		));
+		return matches ? decodeURI(matches[1]) : undefined;
+	}
+	// установить Cookies
+	setCookie(name, value, options = {}) {
+
+		options = {
+			path: '/',
+		};
+
+		if (options.expires instanceof Date) {
+			options.expires = options.expires.toUTCString();
+		}
+
+		let updatedCookie = encodeURI(name) + "=" + encodeURI(value);
+
+		for (let optionKey in options) {
+			updatedCookie += "; " + optionKey;
+			let optionValue = options[optionKey];
+			if (optionValue !== true) {
+				updatedCookie += "=" + optionValue;
+			}
+		}
+
+		document.cookie = updatedCookie;
+		localStorage.setItem(name, value);
+	}
+	// удалить cookies
+	deleteCookie(name) {
+		const cookieDate = new Date();
+		cookieDate.setTime(cookieDate.getTime() - 1);
+		document.cookie = name += "=; expires=" + cookieDate.toGMTString();
+	}
+
+	// массив из CoociesNames
+	cookiesNames() {
+		const cookiesNames = document.cookie.split("; ").map((item) => {
+			const to = item.search('=');
+			const newstr = item.substring(0, to);
+			return newstr;
+		});
+		return cookiesNames;
+	}
+
+	// показываем результ из хранилища
+	showLocalResult() {
+
+		const localNames = [];
+		for (let i = 0; i < localStorage.length; i++) {
+			let key = localStorage.key(i);
+			localNames.push(key);
+		}
+
+		localNames.forEach((item) => {
+			if (!this.cookiesNames().includes(item) && this.cookiesNames() >= 1) {
+				this.cookiesNames().forEach((item) => {
+					this.deleteCookie(item);
+				});
+				localStorage.clear();
+			}
+		});
+
+		if (localStorage.length !== 0) {
+			textInputs.forEach((item) => {
+				item.setAttribute("disabled", "true");
+			});
+			calculationButton.style.display = 'none';
+			resetBtn.style.display = 'block';
+			incomeButton.setAttribute("disabled", "true");
+			expensesButton.setAttribute("disabled", "true");
+			checkInput.setAttribute("disabled", "true");
+			depositBank.setAttribute("disabled", "true");
+		}
+
+		budgetMonthValue.value = localStorage.getItem('budgetMonthValue');
+		budgetDayValue.value = localStorage.getItem('budgetDayValue');
+		expensesMonthValue.value = localStorage.getItem('expensesMonthValue');
+		additionalExpensesValue.value = localStorage.getItem('additionalExpensesValue');
+		additionalIncomeValue.value = localStorage.getItem('additionalIncomeValue');
+		targetMonthValue.value = localStorage.getItem('targetMonthValue');
+		incomePeriodValue.value = localStorage.getItem('incomePeriodValue');
+	}
 	// проверка на число
 	isNumber(event) {
 		event.target.value = event.target.value.replace(/\D/g, '');
@@ -91,6 +178,18 @@ class AppData {
 		this.getAddInExp();
 
 		this.showResult();
+
+
+
+		this.setCookie('budgetMonthValue', budgetMonthValue.value);
+		this.setCookie('budgetDayValue', budgetDayValue.value);
+		this.setCookie('expensesMonthValue', expensesMonthValue.value);
+		this.setCookie('additionalIncomeValue', additionalIncomeValue.value);
+		this.setCookie('additionalExpensesValue', additionalExpensesValue.value);
+		this.setCookie('incomePeriodValue', incomePeriodValue.value);
+		this.setCookie('targetMonthValue', targetMonthValue.value);
+		this.setCookie('isLoad', true);
+
 	}
 	// показываем результат
 	showResult() {
@@ -339,12 +438,16 @@ class AppData {
 
 		checkInput.checked = false;
 		this.depositHandler();
-
+		this.cookiesNames().forEach((item) => {
+			this.deleteCookie(item);
+		});
+		localStorage.clear();
 	}
 
 	// слушатели событий
 	eventListeners() {
 		this.validation();
+		this.showLocalResult();
 
 		periodRange.addEventListener('input', () => {
 			periodАmount.textContent = periodRange.value;
@@ -358,7 +461,7 @@ class AppData {
 
 		calculationButton.addEventListener('click', this.start.bind(this));
 		resetBtn.addEventListener('click', this.reset.bind(this));
-		checkInput.addEventListener('change', this.depositHandler.bind(this))
+		checkInput.addEventListener('change', this.depositHandler.bind(this));
 	}
 }
 
