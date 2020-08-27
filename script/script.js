@@ -247,6 +247,7 @@ class AppData {
 			depositPercent.addEventListener('input', this.isNumber);
 			depositPercent.addEventListener('input', () => {
 				if (depositPercent.value > 100 || depositPercent.value < 1) {
+					alert('Веденное число должно быть от 1 до 100');
 					depositPercent.value = '';
 				}
 			});
@@ -262,6 +263,7 @@ class AppData {
 			depositPercent.removeEventListener('input', this.isNumber);
 			depositPercent.removeEventListener('input', () => {
 				if (depositPercent.value > 100 || depositPercent.value < 1) {
+					alert('Веденное число должно быть от 1 до 100');
 					depositPercent.value = '';
 				}
 			});
