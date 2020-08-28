@@ -112,9 +112,10 @@ class AppData {
 			let key = localStorage.key(i);
 			localNames.push(key);
 		}
-
+		console.log(this.cookiesNames());
 		localNames.forEach((item) => {
-			if (!this.cookiesNames().includes(item) && this.cookiesNames() >= 1) {
+			console.log(item);
+			if (!this.cookiesNames().includes(item) && this.cookiesNames().length >= 1) {
 				this.cookiesNames().forEach((item) => {
 					this.deleteCookie(item);
 				});
