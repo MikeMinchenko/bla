@@ -42,6 +42,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		}
 
 		if (getTimeRemaining().timeRemaining > 0) {
+			updateClock();
 			setInterval(updateClock, 1000);
 		} else {
 			timerSeconds.textContent = '00';

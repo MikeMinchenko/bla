@@ -45,8 +45,7 @@ const toLog = function () {
 			0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2];
 	}
 
-
-	setInterval(() => {
+	function toHtml() {
 		const timeString = new Date().toLocaleTimeString('en');
 
 		document.body.innerHTML =
@@ -55,7 +54,11 @@ const toLog = function () {
 	<i>Текущее время: ${timeString}</i><br>
 	<i>До Нового Года осталось: ${declOfNum(toNewYear(), ['день', 'дня', 'дней'])} </i>
 	`;
-	}, 1000);
+	}
+
+
+	toHtml();
+	setInterval(toHtml, 1000);
 
 
 };
