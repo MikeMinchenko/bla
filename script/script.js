@@ -4,7 +4,6 @@ const calculationButton = document.getElementById('start'),
 	resetBtn = document.getElementById('cancel'),
 	incomeButton = document.getElementsByTagName('button')[0],
 	expensesButton = document.getElementsByTagName('button')[1],
-	depositCheck = document.querySelector('#deposit-check'),
 	additionalExpensesItem = document.querySelector('.additional_expenses-item'),
 	value = document.getElementsByClassName('result-total'),
 	budgetMonthValue = value[0],
@@ -58,7 +57,8 @@ class AppData {
 
 	// получить Cookies
 	getCookie(name) {
-		let matches = document.cookie.match(new RegExp(
+		const matches = document.cookie.match(new RegExp(
+			// eslint-disable-next-line no-useless-escape
 			"(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
 		));
 		return matches ? decodeURI(matches[1]) : undefined;
@@ -76,9 +76,9 @@ class AppData {
 
 		let updatedCookie = encodeURI(name) + "=" + encodeURI(value);
 
-		for (let optionKey in options) {
+		for (const optionKey in options) {
 			updatedCookie += "; " + optionKey;
-			let optionValue = options[optionKey];
+			const optionValue = options[optionKey];
 			if (optionValue !== true) {
 				updatedCookie += "=" + optionValue;
 			}
@@ -96,7 +96,7 @@ class AppData {
 
 	// массив из CoociesNames
 	cookiesNames() {
-		const cookiesNames = document.cookie.split("; ").map((item) => {
+		const cookiesNames = document.cookie.split("; ").map(item => {
 			const to = item.search('=');
 			const newstr = item.substring(0, to);
 			return newstr;
@@ -109,14 +109,14 @@ class AppData {
 
 		const localNames = [];
 		for (let i = 0; i < localStorage.length; i++) {
-			let key = localStorage.key(i);
+			const key = localStorage.key(i);
 			localNames.push(key);
 		}
 		console.log(this.cookiesNames());
-		localNames.forEach((item) => {
+		localNames.forEach(item => {
 			console.log(item);
 			if (!this.cookiesNames().includes(item) && this.cookiesNames().length >= 1) {
-				this.cookiesNames().forEach((item) => {
+				this.cookiesNames().forEach(item => {
 					this.deleteCookie(item);
 				});
 				localStorage.clear();
@@ -124,7 +124,7 @@ class AppData {
 		});
 
 		if (localStorage.length !== 0) {
-			textInputs.forEach((item) => {
+			textInputs.forEach(item => {
 				item.setAttribute("disabled", "true");
 			});
 			calculationButton.style.display = 'none';
@@ -158,7 +158,7 @@ class AppData {
 			return;
 		}
 		textInputs = document.querySelectorAll('[type="text"]');
-		textInputs.forEach((item) => {
+		textInputs.forEach(item => {
 			item.setAttribute("disabled", "true");
 		});
 		calculationButton.style.display = 'none';
@@ -228,7 +228,7 @@ class AppData {
 		incomeItems = document.querySelectorAll('.income-items');
 		expensesItems = document.querySelectorAll('.expenses-items');
 
-		const count = (item) => {
+		const count = item => {
 			const itemStr = item.className.split('-')[0];
 			const itemTitle = item.querySelector(`.${itemStr}-title`).value,
 				itemAmount = item.querySelector(`.${itemStr}-amount`).value;
@@ -247,7 +247,7 @@ class AppData {
 		const addExpensesItems = additionalExpensesItem.value.split(',');
 		const addIncomeItems = [];
 
-		additionalIncomeItem.forEach((item) => {
+		additionalIncomeItem.forEach(item => {
 			addIncomeItems.push(item.value);
 		});
 
@@ -381,13 +381,13 @@ class AppData {
 			textPlaceholders = document.querySelectorAll('[placeholder="Наименование"]'),
 			namePlaceholder = document.querySelectorAll('[placeholder="название"]');
 
-		sumPlaceholders.forEach((item) => {
+		sumPlaceholders.forEach(item => {
 			item.addEventListener('input', this.isNumber);
 		});
-		textPlaceholders.forEach((item) => {
+		textPlaceholders.forEach(item => {
 			item.addEventListener('input', this.isText);
 		});
-		namePlaceholder.forEach((item) => {
+		namePlaceholder.forEach(item => {
 			item.addEventListener('input', this.isText);
 		});
 
@@ -395,7 +395,7 @@ class AppData {
 
 	// сброс
 	reset() {
-		textInputs.forEach((item) => {
+		textInputs.forEach(item => {
 			item.removeAttribute("disabled");
 			item.value = '';
 		});
@@ -419,7 +419,7 @@ class AppData {
 		this.budgetDay = 0;
 		this.expensesMonth = 0;
 		this.incomeMonth = 0;
-		incomeItems.forEach((item) => {
+		incomeItems.forEach(item => {
 			incomeItems = document.querySelectorAll('.income-items');
 			if (incomeItems.length > 1) {
 				item.remove();
@@ -428,7 +428,7 @@ class AppData {
 			}
 
 		});
-		expensesItems.forEach((item) => {
+		expensesItems.forEach(item => {
 			expensesItems = document.querySelectorAll('.expenses-items');
 			if (expensesItems.length > 1) {
 				item.remove();
@@ -439,7 +439,7 @@ class AppData {
 
 		checkInput.checked = false;
 		this.depositHandler();
-		this.cookiesNames().forEach((item) => {
+		this.cookiesNames().forEach(item => {
 			this.deleteCookie(item);
 		});
 		localStorage.clear();
