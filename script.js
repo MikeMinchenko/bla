@@ -201,4 +201,5 @@ window.addEventListener('DOMContentLoaded', () => {
 		}
 	};
 	scroll();
+
 });
