@@ -104,11 +104,16 @@ window.addEventListener('DOMContentLoaded', () => {
 				}
 			});
 		}
+		let windowWidth;
+
+		window.addEventListener('resize', () => {
+			windowWidth = window.innerWidth;
+		});
 		// функция открытия модального окна
 		const openPopup = () => {
 			popup.style.display = 'block';
 
-			if (window.innerWidth > 768) {
+			if (windowWidth > 768) {
 				animate({
 					duration: 500,
 					timing(timeFraction) {
@@ -119,11 +124,15 @@ window.addEventListener('DOMContentLoaded', () => {
 					}
 				});
 				popup.style.visibility = 'visible';
+			} else {
+				popup.style.visibility = 'visible';
+				popup.style.opacity = 1;
 			}
+
 		};
 		// фунция закрытия модального окна
 		const closePopup = () => {
-			if (window.innerWidth > 768) {
+			if (windowWidth > 768) {
 				window.setTimeout(() => (popup.style.visibility = 'hidden'), 500);
 				animate({
 					duration: 500,
