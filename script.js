@@ -57,12 +57,11 @@ window.addEventListener('DOMContentLoaded', () => {
 			menu = document.querySelector('menu'),
 			closeBtn = document.querySelector('.close-btn');
 
-
 		const handlerMenu = () => {
 			menu.classList.toggle('active-menu');
 		};
 
-		document.addEventListener('click', event => {
+		document.addEventListener('click', (event) => {
 			const target = event.target;
 			if (target === closeBtn || target.closest('ul')) {
 				handlerMenu();
@@ -140,9 +139,9 @@ window.addEventListener('DOMContentLoaded', () => {
 			}
 		};
 
-		popupBtnt.forEach(item => item.addEventListener('click', openPopup));
+		popupBtnt.forEach((item) => item.addEventListener('click', openPopup));
 		// закрываем на клик вне модалки и на кнопку закрыть
-		popup.addEventListener('click', event => {
+		popup.addEventListener('click', (event) => {
 			let target = event.target;
 			if (target === popupClose) {
 				closePopup();
@@ -162,7 +161,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			tab = tabHeader.querySelectorAll('.service-header-tab'),
 			tabContent = document.querySelectorAll('.service-tab');
 
-		tabHeader.addEventListener('click', event => {
+		tabHeader.addEventListener('click', (event) => {
 			let target = event.target;
 			target = target.closest('.service-header-tab');
 
@@ -181,4 +180,25 @@ window.addEventListener('DOMContentLoaded', () => {
 	};
 
 	tabs();
+	// скролл до элемента
+	const scroll = () => {
+		const anchors = document.querySelectorAll('a[href*="#"]');
+
+		for (const anchor of anchors) {
+			anchor.addEventListener('click', (event) => {
+				event.preventDefault();
+
+				const blockID = anchor.getAttribute('href'),
+					idElem = document.querySelector(blockID);
+				if (idElem) {
+					const idElemY = idElem.offsetTop;
+					window.scrollTo({
+						top: idElemY,
+						behavior: 'smooth'
+					});
+				}
+			});
+		}
+	};
+	scroll();
 });
