@@ -55,16 +55,20 @@ window.addEventListener('DOMContentLoaded', () => {
 	const toogleMenu = () => {
 		const btnMenu = document.querySelector('.menu'),
 			menu = document.querySelector('menu'),
-			closeBtn = document.querySelector('.close-btn'),
-			menuItems = menu.querySelectorAll('ul>li');
+			closeBtn = document.querySelector('.close-btn');
+		// menuItems = menu.querySelectorAll('ul>li');
 
 		const handlerMenu = () => {
 			menu.classList.toggle('active-menu');
 		};
 
+		menu.addEventListener('click', (event) => {
+			const target = event.target;
+			if (target === closeBtn || target.closest('ul')) {
+				handlerMenu();
+			}
+		});
 		btnMenu.addEventListener('click', handlerMenu);
-		closeBtn.addEventListener('click', handlerMenu);
-		menuItems.forEach(item => item.addEventListener('click', handlerMenu));
 	};
 
 	toogleMenu();
@@ -73,15 +77,12 @@ window.addEventListener('DOMContentLoaded', () => {
 		const popup = document.querySelector('.popup'),
 			popupBtnt = document.querySelectorAll('.popup-btn'),
 			popupClose = document.querySelector('.popup-close');
-
-
-
+		// функция анимации
 		function animate({
 			timing,
 			draw,
 			duration
 		}) {
-
 			const start = performance.now();
 
 			requestAnimationFrame(function animate(time) {
@@ -99,10 +100,10 @@ window.addEventListener('DOMContentLoaded', () => {
 				if (timeFraction < 1) {
 					requestAnimationFrame(animate);
 				}
-
 			});
 		}
-		popupBtnt.forEach(item => item.addEventListener('click', () => {
+		// функция открытия модального окна
+		const openPopup = () => {
 			popup.style.display = 'block';
 
 			if (window.innerWidth > 768) {
@@ -117,11 +118,11 @@ window.addEventListener('DOMContentLoaded', () => {
 				});
 				popup.style.visibility = 'visible';
 			}
-		}));
-
-		popupClose.addEventListener('click', () => {
+		};
+		// фунция закрытия модального окна
+		const closePopup = () => {
 			if (window.innerWidth > 768) {
-				window.setTimeout(() => popup.style.visibility = 'hidden', 500);
+				window.setTimeout(() => (popup.style.visibility = 'hidden'), 500);
 				animate({
 					duration: 500,
 					timing(timeFraction) {
@@ -131,12 +132,50 @@ window.addEventListener('DOMContentLoaded', () => {
 						popup.style.opacity = 1 - progress;
 					}
 				});
-
 			} else {
 				popup.style.display = 'none';
 			}
-		});
+		};
 
+		popupBtnt.forEach((item) => item.addEventListener('click', openPopup));
+		// закрываем на клик вне модалки и на кнопку закрыть
+		popup.addEventListener('click', (event) => {
+			let target = event.target;
+			if (target === popupClose) {
+				closePopup();
+			} else {
+				target = target.closest('.popup-content');
+				if (!target) {
+					closePopup();
+				}
+			}
+		});
 	};
+
 	tooglePopup();
+	// табы
+	const tabs = () => {
+		const tabHeader = document.querySelector('.service-header'),
+			tab = tabHeader.querySelectorAll('.service-header-tab'),
+			tabContent = document.querySelectorAll('.service-tab');
+
+		tabHeader.addEventListener('click', (event) => {
+			let target = event.target;
+			target = target.closest('.service-header-tab');
+
+			if (target) {
+				tab.forEach((item, i) => {
+					if (item === target) {
+						item.classList.add('active');
+						tabContent[i].classList.remove('d-none');
+					} else {
+						item.classList.remove('active');
+						tabContent[i].classList.add('d-none');
+					}
+				});
+			}
+		});
+	};
+
+	tabs();
 });
