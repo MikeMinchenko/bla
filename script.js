@@ -62,13 +62,16 @@ window.addEventListener('DOMContentLoaded', () => {
 			menu.classList.toggle('active-menu');
 		};
 
-		menu.addEventListener('click', (event) => {
+		document.addEventListener('click', event => {
 			const target = event.target;
 			if (target === closeBtn || target.closest('ul')) {
 				handlerMenu();
+			} else if (target.closest('.menu')) {
+				handlerMenu();
+			} else if (target !== menu) {
+				menu.classList.remove('active-menu');
 			}
 		});
-		btnMenu.addEventListener('click', handlerMenu);
 	};
 
 	toogleMenu();
@@ -137,9 +140,9 @@ window.addEventListener('DOMContentLoaded', () => {
 			}
 		};
 
-		popupBtnt.forEach((item) => item.addEventListener('click', openPopup));
+		popupBtnt.forEach(item => item.addEventListener('click', openPopup));
 		// закрываем на клик вне модалки и на кнопку закрыть
-		popup.addEventListener('click', (event) => {
+		popup.addEventListener('click', event => {
 			let target = event.target;
 			if (target === popupClose) {
 				closePopup();
@@ -159,7 +162,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			tab = tabHeader.querySelectorAll('.service-header-tab'),
 			tabContent = document.querySelectorAll('.service-tab');
 
-		tabHeader.addEventListener('click', (event) => {
+		tabHeader.addEventListener('click', event => {
 			let target = event.target;
 			target = target.closest('.service-header-tab');
 
