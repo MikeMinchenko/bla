@@ -11,14 +11,14 @@ class Todo {
 	}
 	// анимация удаления
 	animDel(elem) {
-		let count = 0;
+		let count = 100;
 		const step = 5;
 
 		const deleteAnim = () => {
-			count += step;
-			elem.style.transform = `translateX(${count}%)`;
+			count -= step;
+			elem.style.opacity = count / 100;
 
-			if (count < 150) {
+			if (count > 0) {
 				requestAnimationFrame(deleteAnim);
 			}
 		};
@@ -26,14 +26,14 @@ class Todo {
 	}
 
 	animAdd(elem) {
-		let count = 150;
+		let count = 0; //getComputedStyle('opacity');
 		const step = 5;
 
 		const addAnim = () => {
-			count -= step;
-			elem.style.transform = `translateX(${count}%)`;
+			count += step;
+			elem.style.opacity = count / 100;
 
-			if (count > 0) {
+			if (count < 100) {
 				requestAnimationFrame(addAnim);
 			}
 		};
@@ -52,23 +52,30 @@ class Todo {
 				item.contenteditable = !item.contenteditable;
 			}
 		});
-
 		this.render();
 	}
 
 	// обработчик клика по кнопкам внутри li и по клавише enter
 	handler() {
 		this.todoContainer.addEventListener('click', (e) => {
-			const target = e.target;
+			const target = e.target,
+				element = target.closest('li');
 
 			if (target.matches('.todo-remove')) {
-				this.animDel(target.closest('li'));
-				this.deleteItem(target.closest('li'));
+				this.animDel(element);
+				this.deleteItem(element);
 			} else if (target.matches('.todo-complete')) {
-				this.completedItem(target.closest('li'));
-				this.animDel(target.closest('li'));
+				this.animDel(element);
+
+				setTimeout(() => {
+					this.completedItem(element);
+				}, 500);
+
+				setTimeout(() => {
+					this.animAdd(element);
+				}, 600);
 			} else if (target.matches('.todo-edit')) {
-				this.editing(target.closest('li'));
+				this.editing(element);
 			}
 		});
 
@@ -89,7 +96,7 @@ class Todo {
 		});
 		setTimeout(() => {
 			this.render();
-		}, 400);
+		}, 500);
 	}
 
 	// добавляем элемент в список комплит
@@ -97,8 +104,14 @@ class Todo {
 		this.todoData.forEach((item) => {
 			if (item.key === elem.key) {
 				item.completed = !item.completed;
+				this.addToStorage();
+
+				if (!item.completed) {
+					this.todoList.insertAdjacentElement('beforeend', elem);
+				} else {
+					this.todoComleted.insertAdjacentElement('beforeend', elem);
+				}
 			}
-			this.render();
 		});
 
 		// перебираем todo data и меняем значение completed
