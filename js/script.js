@@ -16,7 +16,22 @@ class Todo {
 		localStorage.setItem('todoList', JSON.stringify([...this.todoData]));
 	}
 
-	// обработчик клика по кнопкам внутри li
+	// возможность редактирования тудушек
+	editing(elem) {
+		const elemKey = elem.getAttribute('key');
+		this.todoData.forEach(item => {
+
+			if (item.key === elemKey) {
+				item.value = elem.textContent.trim();
+				item.contenteditable = !item.contenteditable;
+			}
+
+		});
+
+		this.render();
+	}
+
+	// обработчик клика по кнопкам внутри li и по клавише enter
 	handler() {
 
 		this.todoContainer.addEventListener('click', e => {
@@ -26,10 +41,18 @@ class Todo {
 				this.deleteItem(target.closest('li'));
 			} else if (target.matches('.todo-complete')) {
 				this.completedItem(target.closest('li'));
+			} else if (target.matches('.todo-edit')) {
+				this.editing(target.closest('li'));
 			}
 
 		});
 
+		this.todoContainer.addEventListener('keydown', e => {
+			if (e.key === 'Enter') {
+				e.preventDefault();
+				this.editing(e.target.closest('li'));
+			}
+		});
 	}
 
 	// фунция удаления элементов
@@ -53,7 +76,6 @@ class Todo {
 			}
 
 		});
-		console.log(this.todoData);
 
 		this.render();
 		// перебираем todo data и меняем значение completed
@@ -71,9 +93,11 @@ class Todo {
 		const li = document.createElement('li');
 		li.classList.add('todo-item');
 		li.setAttribute('key', item.key);
+		li.setAttribute('contenteditable', item.contenteditable);
 		li.insertAdjacentHTML('beforeend', `
 			<span class="text-todo">${item.value}</span>
 			<div class="todo-buttons">
+				<button class="todo-edit"></button>
 				<button class="todo-remove"></button>
 				<button class="todo-complete"></button>
 			</div>
@@ -94,7 +118,8 @@ class Todo {
 			const newTodo = {
 				value: this.input.value,
 				completed: false,
-				key: this.generateKey()
+				key: this.generateKey(),
+				contenteditable: false
 			};
 
 			this.todoData.set(newTodo.key, newTodo);
