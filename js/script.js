@@ -9,7 +9,37 @@ class Todo {
 		this.todoData = new Map(JSON.parse(localStorage.getItem('todoList')));
 		this.todoContainer = document.querySelector('.todo-container');
 	}
+	// анимация удаления
+	animDel(elem) {
+		let count = 0;
+		const step = 5;
 
+		const deleteAnim = () => {
+			count += step;
+			elem.style.transform = `translateX(${count}%)`;
+
+			if (count < 150) {
+				requestAnimationFrame(deleteAnim);
+			}
+		};
+		requestAnimationFrame(deleteAnim);
+	}
+
+	animAdd(elem) {
+		let count = 150;
+		const step = 5;
+
+		const addAnim = () => {
+			count -= step;
+			elem.style.transform = `translateX(${count}%)`;
+
+			if (count > 0) {
+				requestAnimationFrame(addAnim);
+			}
+		};
+		requestAnimationFrame(addAnim);
+	}
+	// добавление в local storage
 	addToStorage() {
 		localStorage.setItem('todoList', JSON.stringify([ ...this.todoData ]));
 	}
@@ -32,9 +62,11 @@ class Todo {
 			const target = e.target;
 
 			if (target.matches('.todo-remove')) {
+				this.animDel(target.closest('li'));
 				this.deleteItem(target.closest('li'));
 			} else if (target.matches('.todo-complete')) {
 				this.completedItem(target.closest('li'));
+				this.animDel(target.closest('li'));
 			} else if (target.matches('.todo-edit')) {
 				this.editing(target.closest('li'));
 			}
@@ -55,7 +87,9 @@ class Todo {
 				this.todoData.delete(index);
 			}
 		});
-		this.render();
+		setTimeout(() => {
+			this.render();
+		}, 400);
 	}
 
 	// добавляем элемент в список комплит
@@ -64,9 +98,9 @@ class Todo {
 			if (item.key === elem.key) {
 				item.completed = !item.completed;
 			}
+			this.render();
 		});
 
-		this.render();
 		// перебираем todo data и меняем значение completed
 	}
 
@@ -82,7 +116,7 @@ class Todo {
 		const li = document.createElement('li');
 		li.classList.add('todo-item');
 		li.key = item.key;
-		li.setAttribute('contenteditable', item.contenteditable);
+
 		li.insertAdjacentHTML(
 			'beforeend',
 			`
@@ -94,12 +128,12 @@ class Todo {
 			</div>
 		`
 		);
+		li.querySelector('.text-todo').setAttribute('contenteditable', item.contenteditable);
 
 		if (item.completed) {
 			this.todoComleted.append(li);
 		} else {
 			this.todoList.append(li);
-			console.dir(li);
 		}
 	}
 
