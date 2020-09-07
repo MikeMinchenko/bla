@@ -15,7 +15,7 @@ colorFind(document.body.innerHTML);
 // текст в кавычках в тег <mark>
 
 const markFunc = (elem) => {
-	return elem.replace(/".+"|«.+»/gi, (match) => `<mark>${match}</mark>`);
+	return elem.replace(/".+?"|«.+?»/gis, (match) => `<mark>${match}</mark>`);
 };
 
 // первый вид ссылки
@@ -43,6 +43,7 @@ firsFunc();
 const secondFunc = () => {
 	secondTaskParagraph.forEach((item) => {
 		let newElem = item.textContent.replace(/\d{2}\:\d{2}/g, (match) => `<b>${match}</b>`);
+
 		newElem = markFunc(newElem);
 		newElem = linkFunc(newElem);
 
