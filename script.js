@@ -311,14 +311,15 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	const changeImage = () => {
 		const comandBlock = document.getElementById('command');
-		let src;
+		let imageArr;
 
 		comandBlock.addEventListener('mouseover', (e) => {
 			const target = e.target;
 
 			if (target.matches('.command__photo')) {
-				src = target.src;
-				target.src = target.dataset.img;
+				imageArr = [ target.src, target.dataset.img ];
+				target.src = imageArr[1];
+				target.dataset.img = imageArr[0];
 			}
 		});
 
@@ -326,7 +327,8 @@ window.addEventListener('DOMContentLoaded', () => {
 			const target = e.target;
 
 			if (target.matches('.command__photo')) {
-				target.src = src;
+				target.src = imageArr[0];
+				target.dataset.img = imageArr[1];
 			}
 		});
 	};
