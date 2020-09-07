@@ -310,26 +310,18 @@ window.addEventListener('DOMContentLoaded', () => {
 	// изменнение картинок в блоке наша команда
 
 	const changeImage = () => {
-		const comandBlock = document.getElementById('command');
-		let imageArr;
+		const comandElem = document.querySelectorAll('.command__photo');
 
-		comandBlock.addEventListener('mouseover', (e) => {
-			const target = e.target;
-
-			if (target.matches('.command__photo')) {
-				imageArr = [ target.src, target.dataset.img ];
-				target.src = imageArr[1];
-				target.dataset.img = imageArr[0];
-			}
+		comandElem.forEach((item) => {
+			item.addEventListener('mouseover', (event) => {
+				[ event.target.src, event.target.dataset.img ] = [ event.target.dataset.img, event.target.src ];
+			});
 		});
 
-		comandBlock.addEventListener('mouseout', (e) => {
-			const target = e.target;
-
-			if (target.matches('.command__photo')) {
-				target.src = imageArr[0];
-				target.dataset.img = imageArr[1];
-			}
+		comandElem.forEach((item) => {
+			item.addEventListener('mouseout', (event) => {
+				[ event.target.dataset.img, event.target.src ] = [ event.target.src, event.target.dataset.img ];
+			});
 		});
 	};
 
