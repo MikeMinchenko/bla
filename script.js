@@ -62,7 +62,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			menu.classList.toggle('active-menu');
 		};
 
-		document.addEventListener('click', event => {
+		document.addEventListener('click', (event) => {
 			const target = event.target;
 			if (target === closeBtn || target.closest('menu>ul')) {
 				handlerMenu();
@@ -81,11 +81,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			popupBtnt = document.querySelectorAll('.popup-btn'),
 			popupClose = document.querySelector('.popup-close');
 		// функция анимации
-		function animate({
-			timing,
-			draw,
-			duration
-		}) {
+		function animate({ timing, draw, duration }) {
 			const start = performance.now();
 
 			requestAnimationFrame(function animate(time) {
@@ -129,7 +125,6 @@ window.addEventListener('DOMContentLoaded', () => {
 				popup.style.visibility = 'visible';
 				popup.style.opacity = 1;
 			}
-
 		};
 		// фунция закрытия модального окна
 		const closePopup = () => {
@@ -149,9 +144,9 @@ window.addEventListener('DOMContentLoaded', () => {
 			}
 		};
 
-		popupBtnt.forEach(item => item.addEventListener('click', openPopup));
+		popupBtnt.forEach((item) => item.addEventListener('click', openPopup));
 		// закрываем на клик вне модалки и на кнопку закрыть
-		popup.addEventListener('click', event => {
+		popup.addEventListener('click', (event) => {
 			let target = event.target;
 			if (target === popupClose) {
 				closePopup();
@@ -171,7 +166,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			tab = tabHeader.querySelectorAll('.service-header-tab'),
 			tabContent = document.querySelectorAll('.service-tab');
 
-		tabHeader.addEventListener('click', event => {
+		tabHeader.addEventListener('click', (event) => {
 			let target = event.target;
 			target = target.closest('.service-header-tab');
 
@@ -196,7 +191,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		const anchors = document.querySelectorAll('a[href*="#"]');
 
 		for (const anchor of anchors) {
-			anchor.addEventListener('click', event => {
+			anchor.addEventListener('click', (event) => {
 				event.preventDefault();
 
 				const blockID = anchor.getAttribute('href'),
@@ -215,7 +210,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	// слайдер
 	const slider = () => {
-
 		const slide = document.querySelectorAll('.portfolio-item'),
 			slider = document.querySelector('.portfolio-content'),
 			dotsWraper = document.querySelector('.portfolio-dots');
@@ -262,7 +256,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			clearInterval(interval);
 		};
 
-		slider.addEventListener('click', event => {
+		slider.addEventListener('click', (event) => {
 			event.preventDefault();
 
 			const target = event.target;
@@ -294,26 +288,64 @@ window.addEventListener('DOMContentLoaded', () => {
 
 			nextSlide(slide, currentSlide, 'portfolio-item-active');
 			nextSlide(dots, currentSlide, 'dot-active');
-
-
 		});
 
-		slider.addEventListener('mouseover', event => {
+		slider.addEventListener('mouseover', (event) => {
 			if (event.target.matches('.portfolio-btn, .dot')) {
 				stopSlide();
 			}
 		});
 
-		slider.addEventListener('mouseout', event => {
+		slider.addEventListener('mouseout', (event) => {
 			if (event.target.matches('.portfolio-btn, .dot')) {
 				startSlide();
 			}
 		});
 
 		startSlide(1500);
-
 	};
 
 	slider();
 
+	// изменнение картинок в блоке наша команда
+
+	const changeImage = () => {
+		const comandBlock = document.getElementById('command');
+		let src;
+
+		comandBlock.addEventListener('mouseover', (e) => {
+			const target = e.target;
+
+			if (target.matches('.command__photo')) {
+				src = target.src;
+				target.src = target.dataset.img;
+			}
+		});
+
+		comandBlock.addEventListener('mouseout', (e) => {
+			const target = e.target;
+
+			if (target.matches('.command__photo')) {
+				target.src = src;
+			}
+		});
+	};
+
+	changeImage();
+
+	// калькулятор
+
+	const calculator = () => {
+		const calcBlock = document.querySelector('.calc-block');
+
+		calcBlock.addEventListener('input', (e) => {
+			const target = e.target;
+
+			if (target.matches('[type="text"]')) {
+				target.value = target.value.replace(/\D/g, '');
+			}
+		});
+	};
+
+	calculator();
 });
