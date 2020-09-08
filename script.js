@@ -1,5 +1,27 @@
 'use strict';
 window.addEventListener('DOMContentLoaded', () => {
+	// патерн анимации
+	function animate({ timing, draw, duration }) {
+		const start = performance.now();
+
+		requestAnimationFrame(function animate(time) {
+			// timeFraction изменяется от 0 до 1
+			let timeFraction = (time - start) / duration;
+			if (timeFraction > 1) {
+				timeFraction = 1;
+			}
+
+			// вычисление текущего состояния анимации
+			const progress = timing(timeFraction);
+
+			draw(progress); // отрисовать её
+
+			if (timeFraction < 1) {
+				requestAnimationFrame(animate);
+			}
+		});
+	}
+
 	// таймер
 	function countTimer(deadline) {
 		const timerHours = document.querySelector('#timer-hours'),
@@ -80,27 +102,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		const popup = document.querySelector('.popup'),
 			popupBtnt = document.querySelectorAll('.popup-btn'),
 			popupClose = document.querySelector('.popup-close');
-		// функция анимации
-		function animate({ timing, draw, duration }) {
-			const start = performance.now();
 
-			requestAnimationFrame(function animate(time) {
-				// timeFraction изменяется от 0 до 1
-				let timeFraction = (time - start) / duration;
-				if (timeFraction > 1) {
-					timeFraction = 1;
-				}
-
-				// вычисление текущего состояния анимации
-				const progress = timing(timeFraction);
-
-				draw(progress); // отрисовать её
-
-				if (timeFraction < 1) {
-					requestAnimationFrame(animate);
-				}
-			});
-		}
 		let windowWidth;
 
 		window.addEventListener('resize', () => {
@@ -329,8 +331,13 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	// калькулятор
 
-	const calculator = () => {
-		const calcBlock = document.querySelector('.calc-block');
+	const calculator = (price = 100) => {
+		const calcBlock = document.querySelector('.calc-block'),
+			calcType = document.querySelector('.calc-type'),
+			calcSquare = document.querySelector('.calc-square'),
+			calcDay = document.querySelector('.calc-day'),
+			calcCount = document.querySelector('.calc-count'),
+			totlalValue = document.getElementById('total');
 
 		calcBlock.addEventListener('input', (e) => {
 			const target = e.target;
@@ -339,7 +346,47 @@ window.addEventListener('DOMContentLoaded', () => {
 				target.value = target.value.replace(/\D/g, '');
 			}
 		});
+
+		const countSum = () => {
+			let total = 0,
+				countValue = 1,
+				dayValue = 1;
+			const typeValue = calcType.options[calcType.selectedIndex].value,
+				squareValue = +calcSquare.value;
+
+			if (calcCount.value > 1) {
+				countValue += (calcCount.value - 1) / 10;
+			}
+
+			if (calcDay.value && calcDay.value < 5) {
+				dayValue *= 2;
+			} else if (calcDay.value && calcDay.value < 10) {
+				dayValue *= 1.5;
+			}
+
+			if (typeValue && squareValue) {
+				total = price * typeValue * squareValue * countValue * dayValue;
+			}
+
+			animate({
+				duration: 300,
+				timing(timeFraction) {
+					return timeFraction;
+				},
+				draw(progress) {
+					totlalValue.textContent = Math.floor(progress * total);
+				}
+			});
+		};
+
+		calcBlock.addEventListener('change', (e) => {
+			const target = e.target;
+
+			if (target.matches('select') || target.matches('input')) {
+				countSum();
+			}
+		});
 	};
 
-	calculator();
+	calculator(100);
 });
