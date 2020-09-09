@@ -352,10 +352,12 @@ window.addEventListener('DOMContentLoaded', () => {
 				countValue += (calcCount.value - 1) / 10;
 			}
 
-			if (calcDay.value && calcDay.value < 5) {
-				dayValue *= 2;
-			} else if (calcDay.value && calcDay.value < 10) {
-				dayValue *= 1.5;
+			if (+calcDay.value !== 0) {
+				if (calcDay.value && +calcDay.value < 5) {
+					dayValue *= 2;
+				} else if (calcDay.value && +calcDay.value < 10) {
+					dayValue *= 1.5;
+				}
 			}
 
 			if (typeValue && squareValue) {
