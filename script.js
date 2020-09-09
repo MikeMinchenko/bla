@@ -76,15 +76,14 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	// меню
 	const toogleMenu = () => {
-		const btnMenu = document.querySelector('.menu'),
-			menu = document.querySelector('menu'),
+		const menu = document.querySelector('menu'),
 			closeBtn = document.querySelector('.close-btn');
 
 		const handlerMenu = () => {
 			menu.classList.toggle('active-menu');
 		};
 
-		document.addEventListener('click', (event) => {
+		document.addEventListener('click', event => {
 			const target = event.target;
 			if (target === closeBtn || target.closest('menu>ul')) {
 				handlerMenu();
@@ -103,16 +102,11 @@ window.addEventListener('DOMContentLoaded', () => {
 			popupBtnt = document.querySelectorAll('.popup-btn'),
 			popupClose = document.querySelector('.popup-close');
 
-		let windowWidth;
-
-		window.addEventListener('resize', () => {
-			windowWidth = window.innerWidth;
-		});
 		// функция открытия модального окна
 		const openPopup = () => {
 			popup.style.display = 'block';
 
-			if (windowWidth > 768) {
+			if (window.innerWidth > 768) {
 				animate({
 					duration: 500,
 					timing(timeFraction) {
@@ -130,7 +124,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		};
 		// фунция закрытия модального окна
 		const closePopup = () => {
-			if (windowWidth > 768) {
+			if (window.innerWidth > 768) {
 				window.setTimeout(() => (popup.style.visibility = 'hidden'), 500);
 				animate({
 					duration: 500,
@@ -146,9 +140,9 @@ window.addEventListener('DOMContentLoaded', () => {
 			}
 		};
 
-		popupBtnt.forEach((item) => item.addEventListener('click', openPopup));
+		popupBtnt.forEach(item => item.addEventListener('click', openPopup));
 		// закрываем на клик вне модалки и на кнопку закрыть
-		popup.addEventListener('click', (event) => {
+		popup.addEventListener('click', event => {
 			let target = event.target;
 			if (target === popupClose) {
 				closePopup();
@@ -168,7 +162,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			tab = tabHeader.querySelectorAll('.service-header-tab'),
 			tabContent = document.querySelectorAll('.service-tab');
 
-		tabHeader.addEventListener('click', (event) => {
+		tabHeader.addEventListener('click', event => {
 			let target = event.target;
 			target = target.closest('.service-header-tab');
 
@@ -193,7 +187,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		const anchors = document.querySelectorAll('a[href*="#"]');
 
 		for (const anchor of anchors) {
-			anchor.addEventListener('click', (event) => {
+			anchor.addEventListener('click', event => {
 				event.preventDefault();
 
 				const blockID = anchor.getAttribute('href'),
@@ -258,7 +252,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			clearInterval(interval);
 		};
 
-		slider.addEventListener('click', (event) => {
+		slider.addEventListener('click', event => {
 			event.preventDefault();
 
 			const target = event.target;
@@ -292,13 +286,13 @@ window.addEventListener('DOMContentLoaded', () => {
 			nextSlide(dots, currentSlide, 'dot-active');
 		});
 
-		slider.addEventListener('mouseover', (event) => {
+		slider.addEventListener('mouseover', event => {
 			if (event.target.matches('.portfolio-btn, .dot')) {
 				stopSlide();
 			}
 		});
 
-		slider.addEventListener('mouseout', (event) => {
+		slider.addEventListener('mouseout', event => {
 			if (event.target.matches('.portfolio-btn, .dot')) {
 				startSlide();
 			}
@@ -314,14 +308,14 @@ window.addEventListener('DOMContentLoaded', () => {
 	const changeImage = () => {
 		const comandElem = document.querySelectorAll('.command__photo');
 
-		comandElem.forEach((item) => {
-			item.addEventListener('mouseover', (event) => {
+		comandElem.forEach(item => {
+			item.addEventListener('mouseover', event => {
 				[ event.target.src, event.target.dataset.img ] = [ event.target.dataset.img, event.target.src ];
 			});
 		});
 
-		comandElem.forEach((item) => {
-			item.addEventListener('mouseout', (event) => {
+		comandElem.forEach(item => {
+			item.addEventListener('mouseout', event => {
 				[ event.target.dataset.img, event.target.src ] = [ event.target.src, event.target.dataset.img ];
 			});
 		});
@@ -339,7 +333,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			calcCount = document.querySelector('.calc-count'),
 			totlalValue = document.getElementById('total');
 
-		calcBlock.addEventListener('input', (e) => {
+		calcBlock.addEventListener('input', e => {
 			const target = e.target;
 
 			if (target.matches('[type="text"]')) {
@@ -379,7 +373,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			});
 		};
 
-		calcBlock.addEventListener('change', (e) => {
+		calcBlock.addEventListener('change', e => {
 			const target = e.target;
 
 			if (target.matches('select') || target.matches('input')) {
