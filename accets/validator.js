@@ -8,15 +8,16 @@ class Validator {
 		this.method = method;
 		this.elementsForm = [ ...this.form.elements ].filter(
 			(item) => item.tagName.toLowerCase() !== 'button' && item.type !== 'button'
-		);
+		); // выбираем из формы только инпуты
 		this.error = new Set();
 	}
 
 	init() {
 		this.elementsForm.forEach((elem) => elem.addEventListener('change', this.chekIt.bind(this)));
+
 		this.setPattern();
+
 		this.form.addEventListener('submit', (e) => {
-			// e.preventDefault();
 			this.elementsForm.forEach((elem) => this.chekIt({ target: elem }));
 			if (this.error.size) {
 				e.preventDefault();
@@ -68,7 +69,7 @@ class Validator {
 		if (elem.nextElementSibling && elem.nextElementSibling.classList.contains('validator-error')) {
 			return;
 		}
-		const errorDiv = document.createElement('div');
+		const errorDiv = document.createElement('div'); // создание дива с описанием ошибки
 		errorDiv.textContent = 'Ошибка в этом поле';
 		errorDiv.classList.add('validator-error');
 		errorDiv.style.cssText = `
@@ -79,7 +80,8 @@ class Validator {
 			font-family: sans-serif;
 			color: red
     `;
-		elem.insertAdjacentElement('afterend', errorDiv);
+
+		elem.insertAdjacentElement('afterend', errorDiv); // добавляем див с ошибкой под инпут
 	}
 
 	showSuccess(elem) {
@@ -92,14 +94,8 @@ class Validator {
 	}
 
 	setPattern() {
-		/* if (!this.pattern.phone) {
-			this.pattern.phone = /\+?[78]([-()]*\d){10}$/;
-		} */
 		this.pattern.phone = this.pattern.phone ? this.pattern.phone : /^(\+7)?8?([-()]*\d){10}$/;
 
-		/* if (!this.pattern.email) {
-			this.pattern.email = /^\w+@\w+\.\w{2,}$/;
-		} */
 		this.pattern.email = this.pattern.email ? this.pattern.email : /^\w+@\w+\.\w{2,}$/;
 	}
 }
