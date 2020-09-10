@@ -385,4 +385,153 @@ window.addEventListener('DOMContentLoaded', () => {
 	};
 
 	calculator(100);
+
+	// Ajax отправка на сервер
+
+	const sendForm = form => {
+		const errorMessage = 'Что то пошло не так...',
+			loadMessage = 'Загрузка...',
+			succesMessge = 'Спасибо! Мы скоро с Вами свяжемся';
+
+		const statusMessage = document.createElement('div'); // создаем еэлемент для оповещения хода загрузки
+		statusMessage.style.cssText = `
+			font-size: 1.6rem;
+			color: #fff;
+		`;
+
+		// валидация success
+		const successValidation = elem => {
+			if (elem.nextElementSibling && elem.nextElementSibling.classList.contains('validator-error')) {
+				elem.nextElementSibling.remove();
+			}
+			elem.style.border = 'none';
+		};
+
+		//  Валидация error
+		const errorValidation = elem => {
+			if (elem.nextElementSibling && elem.nextElementSibling.classList.contains('validator-error')) {
+				return;
+			}
+			elem.style.cssText = 'border: 1px solid tomato';
+			const errorValid = document.createElement('div');
+			errorValid.classList.add('validator-error');
+
+			if (elem.type === 'tel') {
+				errorValid.textContent = 'Введите номер в формате +79998888888';
+			} else if (elem.type === 'email') {
+				errorValid.textContent = 'Введите email в формате email@domain.ru';
+			}
+
+			errorValid.style.cssText = `
+					color: tomato;
+					font-size: 1.2rem;
+				`;
+			elem.insertAdjacentElement('afterend', errorValid);
+		};
+
+		// функция обработки запроса на сервер
+		const postData = (body, outputData, errorData) => {
+			const request = new XMLHttpRequest();
+			// слушатель на статус отправки запроса
+			request.addEventListener('readystatechange', () => {
+				if (request.readyState !== 4) return;
+
+				if (request.status === 200) {
+					form.reset();
+					outputData();
+				} else {
+					errorData();
+				}
+			});
+
+			request.open('POST', 'server.php');
+			//!! вариант с JSON
+			request.setRequestHeader('Content-Type', 'application/json');
+			request.send(JSON.stringify(body));
+
+			//!! вариант с FormData
+			// request.setRequestHeader('Content-Type', 'multipart/form-data');
+
+			// request.send(formData);
+		};
+
+		// слушатель на отправку формы
+		form.addEventListener('submit', event => {
+			const telInput = form.querySelector('[type="tel"]'),
+				emailInput = form.querySelector('[type="email"]'),
+				telPatern = /^(\+7)?8?([-()]*\d){10}$/,
+				emailPatern = /^\w+@\w+\.\w{2,}$/;
+
+			event.preventDefault();
+			form.append(statusMessage);
+
+			const formData = new FormData(form);
+
+			//!! вариант с JSON
+			const body = {};
+
+			formData.forEach((val, key) => {
+				body[key] = val;
+			});
+
+			// проверка валидации поля телефона
+			if (telPatern.test(telInput.value)) {
+				successValidation(telInput);
+			} else {
+				errorValidation(telInput);
+			}
+			if (emailPatern.test(emailInput.value)) {
+				successValidation(emailInput);
+			} else {
+				errorValidation(emailInput);
+			}
+			if (telPatern.test(telInput.value) && emailPatern.test(emailInput.value)) {
+				statusMessage.textContent = loadMessage;
+
+				postData(
+					body,
+					() => (statusMessage.textContent = succesMessge),
+					() => (statusMessage.textContent = errorMessage)
+				);
+			}
+		});
+
+		//  запрет ввода символов в поля ввода
+		const validate = form => {
+			const tel = form.querySelector('[type="tel"]'),
+				email = form.querySelector('[type="email"]'),
+				name = form.querySelector('[type="text"]'),
+				text = form.querySelector('[placeholder="Ваше сообщение"]');
+
+			tel.addEventListener('input', e => {
+				const target = e.target;
+				target.value = target.value.replace(/[^+0-9]/g, '');
+			});
+
+			email.addEventListener('input', e => {
+				const target = e.target;
+				target.value = target.value.replace(/[^@a-zA-Z0-9.-_]/g, '');
+			});
+
+			name.addEventListener('input', e => {
+				const target = e.target;
+				target.value = target.value.replace(/[^а-яА-Я ]/g, '');
+			});
+
+			if (text) {
+				text.addEventListener('input', e => {
+					const target = e.target;
+					target.value = target.value.replace(/[^а-яА-Я ,.!]/g, '');
+				});
+			}
+		};
+
+		validate(form);
+	};
+
+	const forms = document.querySelectorAll('form');
+
+	forms.forEach(item => {
+		sendForm(item);
+	});
 });
