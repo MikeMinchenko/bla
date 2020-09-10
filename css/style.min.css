@@ -1,58 +1,122 @@
 @font-face {
   font-family: Roboto;
   src: url(../fonts/Roboto-Light.eot);
-  src: url(../fonts/Roboto-Light.eot?#iefix) format("embedded-opentype"), url(../fonts/Roboto-Light.woff2) format("woff2"), url(../fonts/Roboto-Light.woff) format("woff"), url(../fonts/Roboto-Light.ttf) format("truetype"), url(../fonts/Roboto-Light.svg#Roboto-Light) format("svg");
+  src: url(../fonts/Roboto-Light.eot?#iefix) format("embedded-opentype"),
+    url(../fonts/Roboto-Light.woff2) format("woff2"), url(../fonts/Roboto-Light.woff) format("woff"),
+    url(../fonts/Roboto-Light.ttf) format("truetype"), url(../fonts/Roboto-Light.svg#Roboto-Light) format("svg");
   font-weight: 300;
   font-style: normal;
-  font-display: swap
+  font-display: swap;
 }
 
 @font-face {
   font-family: Roboto;
   src: url(../fonts/Roboto-Regular.eot);
-  src: url(../fonts/Roboto-Regular.eot?#iefix) format("embedded-opentype"), url(../fonts/Roboto-Regular.woff2) format("woff2"), url(../fonts/Roboto-Regular.woff) format("woff"), url(../fonts/Roboto-Regular.ttf) format("truetype"), url(../fonts/Roboto-Regular.svg#Roboto-Regular) format("svg");
+  src: url(../fonts/Roboto-Regular.eot?#iefix) format("embedded-opentype"),
+    url(../fonts/Roboto-Regular.woff2) format("woff2"), url(../fonts/Roboto-Regular.woff) format("woff"),
+    url(../fonts/Roboto-Regular.ttf) format("truetype"), url(../fonts/Roboto-Regular.svg#Roboto-Regular) format("svg");
   font-weight: 400;
   font-style: normal;
-  font-display: swap
+  font-display: swap;
 }
 
 @font-face {
   font-family: Roboto;
   src: url(../fonts/Roboto-Medium.eot);
-  src: url(../fonts/Roboto-Medium.eot?#iefix) format("embedded-opentype"), url(../fonts/Roboto-Medium.woff2) format("woff2"), url(../fonts/Roboto-Medium.woff) format("woff"), url(../fonts/Roboto-Medium.ttf) format("truetype"), url(../fonts/Roboto-Medium.svg#Roboto-Medium) format("svg");
+  src: url(../fonts/Roboto-Medium.eot?#iefix) format("embedded-opentype"),
+    url(../fonts/Roboto-Medium.woff2) format("woff2"), url(../fonts/Roboto-Medium.woff) format("woff"),
+    url(../fonts/Roboto-Medium.ttf) format("truetype"), url(../fonts/Roboto-Medium.svg#Roboto-Medium) format("svg");
   font-weight: 500;
   font-style: normal;
-  font-display: swap
+  font-display: swap;
 }
 
 @font-face {
   font-family: Roboto;
   src: url(../fonts/Roboto-Bold.eot);
-  src: url(../fonts/Roboto-Bold.eot?#iefix) format("embedded-opentype"), url(../fonts/Roboto-Bold.woff2) format("woff2"), url(../fonts/Roboto-Bold.woff) format("woff"), url(../fonts/Roboto-Bold.ttf) format("truetype"), url(../fonts/Roboto-Bold.svg#Roboto-Bold) format("svg");
+  src: url(../fonts/Roboto-Bold.eot?#iefix) format("embedded-opentype"), url(../fonts/Roboto-Bold.woff2) format("woff2"),
+    url(../fonts/Roboto-Bold.woff) format("woff"), url(../fonts/Roboto-Bold.ttf) format("truetype"),
+    url(../fonts/Roboto-Bold.svg#Roboto-Bold) format("svg");
   font-weight: 700;
   font-style: normal;
-  font-display: swap
+  font-display: swap;
 }
 
-/* input.success {
-  border: 1px solid green !important
+.bubbles {
+  position: relative;
 }
 
-input.error {
-  border: 1px solid red !important
+.bubble {
+  display: inline-block;
+  padding: 0px 5px;
 }
 
-.validator-error {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 12px;
-  font-family: sans-serif;
-  color: red
-} */
+.bubble:nth-of-type(1) .circle {
+  animation-delay: 0.1s;
+}
+
+.bubble:nth-of-type(2) .circle {
+  animation-delay: 0.2s;
+}
+
+.bubble:nth-of-type(3) .circle {
+  animation-delay: 0.3s;
+}
+
+.bubble:nth-of-type(4) .circle {
+  animation-delay: 0.4s;
+}
+
+.bubble:nth-of-type(5) .circle {
+  animation-delay: 0.5s;
+}
+
+.bubble:nth-of-type(6) .circle {
+  animation-delay: 0.6s;
+}
+
+.bubble:nth-of-type(7) .circle {
+  animation-delay: 0.7s;
+}
+
+.bubble:nth-of-type(8) .circle {
+  animation-delay: 0.8s;
+}
+
+.bubble:nth-of-type(9) .circle {
+  animation-delay: 0.9s;
+}
+
+.bubble:nth-of-type(10) .circle {
+  animation-delay: 1s;
+}
+
+.bubble .circle {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #fff;
+  animation: pulse 1.5s infinite;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(0.4);
+    opacity: 0.75;
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
 
 html {
-  font-size: 10px
+  font-size: 10px;
 }
 
 .flex {
@@ -60,22 +124,22 @@ html {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
-  flex-wrap: wrap
+  flex-wrap: wrap;
 }
 
 img {
-  max-width: 100%
+  max-width: 100%;
 }
 
 body {
   font-family: Roboto, sans-serif;
   font-weight: 400;
   text-align: center;
-  font-size: 1.8rem
+  font-size: 1.8rem;
 }
 
 body .container {
-  max-width: 1140px
+  max-width: 1140px;
 }
 
 body .btn.active.focus,
@@ -84,7 +148,7 @@ body .btn.focus,
 body .btn:active.focus,
 body .btn:active:focus,
 body .btn:focus {
-  outline: 0
+  outline: 0;
 }
 
 body a:focus,
@@ -92,11 +156,11 @@ body button:active,
 body button:focus,
 body input:focus,
 body textarea:focus {
-  outline: 0
+  outline: 0;
 }
 
 body .menu:hover {
-  cursor: pointer
+  cursor: pointer;
 }
 
 body menu {
@@ -104,7 +168,7 @@ body menu {
   width: 50%;
   height: 100vh;
   background-color: #000;
-  opacity: .9;
+  opacity: 0.9;
   left: 0;
   margin: 0;
   top: 0;
@@ -119,36 +183,36 @@ body menu {
   -ms-flex-pack: center;
   justify-content: center;
   -webkit-transform: translateX(-100%);
-  transform: translateX(-100%)
+  transform: translateX(-100%);
 }
 
 body .active-menu {
   -webkit-transition: 1s;
   transition: 1s;
   -webkit-transform: translateX(100%);
-  transform: translateX(100%)
+  transform: translateX(100%);
 }
 
 body ul {
   list-style: none;
   padding: 0;
   margin: 0;
-  line-height: 3
+  line-height: 3;
 }
 
 body li a {
   font-size: 2rem;
-  color: #fff
+  color: #fff;
 }
 
 body a:hover {
   text-decoration: none;
-  color: #19b5fe
+  color: #19b5fe;
 }
 
 body p {
   font-weight: 300;
-  margin: 0
+  margin: 0;
 }
 
 body .close-btn {
@@ -156,8 +220,8 @@ body .close-btn {
   top: 30px;
   left: 30px;
   font-size: 3rem;
-  -webkit-transition: .2s;
-  transition: .2s;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
   -webkit-transform-origin: 50% 53%;
   transform-origin: 50% 53%;
   display: block;
@@ -165,41 +229,41 @@ body .close-btn {
   text-align: center;
   width: 3rem;
   height: 3rem;
-  color: #19b5fe
+  color: #19b5fe;
 }
 
 body .close-btn:hover {
   -webkit-transform: rotate(180deg);
-  transform: rotate(180deg)
+  transform: rotate(180deg);
 }
 
 body .underline {
   display: inline-block;
   border-bottom: 1px solid #19b5fe;
   width: 38rem;
-  margin-bottom: 3rem
+  margin-bottom: 3rem;
 }
 
 body h1 {
   font-size: 4.8rem;
   font-family: Roboto, sans-serif;
   font-weight: 700;
-  letter-spacing: .1px;
-  line-height: .9
+  letter-spacing: 0.1px;
+  line-height: 0.9;
 }
 
 body h2 {
   font-size: 3.6rem;
   font-weight: 300;
-  margin-bottom: 2rem
+  margin-bottom: 2rem;
 }
 
 body .description {
-  font-size: 2.5rem
+  font-size: 2.5rem;
 }
 
 body small {
-  font-size: 1.2rem
+  font-size: 1.2rem;
 }
 
 body .main-form input {
@@ -209,7 +273,7 @@ body .main-form input {
   font-size: 1.3rem;
   border: none;
   padding-left: 2.7rem;
-  color: #000
+  color: #000;
 }
 
 body .form-btn {
@@ -222,47 +286,47 @@ body .form-btn {
   border-radius: 5rem;
   width: 23rem;
   height: 6rem;
-  margin-top: 20px
+  margin-top: 20px;
 }
 
 body .btn.focus,
 body .btn:focus,
 body .btn:hover {
-  color: #fff
+  color: #fff;
 }
 
 body button:hover {
-  background-color: #ade4f4
+  background-color: #ade4f4;
 }
 
 main {
   padding-top: 1rem;
   padding-bottom: 2.6rem;
   background: url(../images/main-bg.jpg) center/cover no-repeat fixed;
-  color: #fff
+  color: #fff;
 }
 
 main h2 {
   font-family: Roboto, sans-serif;
-  font-weight: 700
+  font-weight: 700;
 }
 
 main header {
   text-align: left;
   padding-top: 3rem;
-  padding-bottom: 3rem
+  padding-bottom: 3rem;
 }
 
 main header .menu {
-  text-align: center
+  text-align: center;
 }
 
 main header .menu small {
-  text-transform: uppercase
+  text-transform: uppercase;
 }
 
 main header .logo-img {
-  max-width: 100%
+  max-width: 100%;
 }
 
 main header .phone-media {
@@ -272,55 +336,55 @@ main header .phone-media {
   display: flex;
   -webkit-box-align: center;
   -ms-flex-align: center;
-  align-items: center
+  align-items: center;
 }
 
 main header .phone-media .media-object {
   margin-top: 8px;
-  margin-right: 10px
+  margin-right: 10px;
 }
 
 main header .phone-media .media-body small {
-  font-size: 1.15rem
+  font-size: 1.15rem;
 }
 
 main header .phone-media .phone {
   font-family: Roboto, sans-serif;
   font-weight: 400;
-  font-size: 2rem
+  font-size: 2rem;
 }
 
 main header .main-header {
-  margin-bottom: 2rem
+  margin-bottom: 2rem;
 }
 
 main .timer {
   margin-top: 3rem;
-  margin-bottom: 6rem
+  margin-bottom: 6rem;
 }
 
 main .timer-action,
 main .timer-title {
-  font-weight: 300
+  font-weight: 300;
 }
 
 main .timer-title {
-  font-size: 2.2rem
+  font-size: 2.2rem;
 }
 
 main .timer-action {
-  margin-top: 3rem
+  margin-top: 3rem;
 }
 
 main .timer-numbers {
-  font-size: 6rem
+  font-size: 6rem;
 }
 
 main .main-form-input {
   display: inline-block;
   width: 96rem;
   height: 8rem;
-  border: 1px solid #fefefe
+  border: 1px solid #fefefe;
 }
 
 main .main-form-input .input-g {
@@ -328,25 +392,23 @@ main .main-form-input .input-g {
   transform: translateY(-3rem);
 }
 
-
-
 main .main-form .form-btn {
   display: inline-block;
   text-align: center;
   -webkit-transform: translateY(-4rem);
-  transform: translateY(-4rem)
+  transform: translateY(-4rem);
 }
 
 main a {
   display: inline-block;
   margin: 3rem auto;
   -webkit-transition: 1s;
-  transition: 1s
+  transition: 1s;
 }
 
 .service {
   background-color: #f2f8f9;
-  padding: 5rem
+  padding: 5rem;
 }
 
 .service-header {
@@ -360,7 +422,7 @@ main a {
   flex-wrap: wrap;
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
-  justify-content: space-between
+  justify-content: space-between;
 }
 
 .service-header-tab {
@@ -370,55 +432,55 @@ main a {
   height: auto;
   text-transform: uppercase;
   vertical-align: middle;
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
   cursor: pointer;
   margin: 0;
   font-weight: 400;
   color: #19b5fe;
-  font-size: 2rem
+  font-size: 2rem;
 }
 
 .service-header-tab.active {
   background-color: #19b5fe;
   border-radius: 3rem;
-  color: #fff !important
+  color: #fff !important;
 }
 
 .service-header-tab span {
-  font-weight: 700
+  font-weight: 700;
 }
 
 .service .description {
   font-weight: 300;
-  color: #19b5fe
+  color: #19b5fe;
 }
 
 .service .service-outer {
-  text-align: left
+  text-align: left;
 }
 
 .service .service-inner {
-  padding: 14% 0 0
+  padding: 14% 0 0;
 }
 
 .service img {
-  width: 100%
+  width: 100%;
 }
 
 .portfolio {
-  padding: 5rem 0
+  padding: 5rem 0;
 }
 
 .portfolio-content {
   position: relative;
   height: 775px;
   margin: 0 auto;
-  display: block
+  display: block;
 }
 
-@media (max-width:1024px) {
+@media (max-width: 1024px) {
   .portfolio-content {
-    height: 650px
+    height: 650px;
   }
 }
 
@@ -430,8 +492,8 @@ main a {
   transform: translate(-50%, -50%);
   width: 100%;
   opacity: 0;
-  -webkit-transition: opacity .5s;
-  transition: opacity .5s
+  -webkit-transition: opacity 0.5s;
+  transition: opacity 0.5s;
 }
 
 .portfolio-item img {
@@ -441,13 +503,13 @@ main a {
   top: 50%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%)
+  transform: translate(-50%, -50%);
 }
 
 .portfolio-item-active {
   opacity: 1;
-  -webkit-transition: opacity .5s;
-  transition: opacity .5s
+  -webkit-transition: opacity 0.5s;
+  transition: opacity 0.5s;
 }
 
 .portfolio-btn {
@@ -457,30 +519,30 @@ main a {
   z-index: 5;
   width: 50px;
   height: 50px;
-  background-color: rgba(0, 0, 0, .5);
+  background-color: rgba(0, 0, 0, 0.5);
   background-repeat: no-repeat;
   background-size: 34px;
   border-radius: 50%;
-  -webkit-transition: background-color .2s;
-  transition: background-color .2s
+  -webkit-transition: background-color 0.2s;
+  transition: background-color 0.2s;
 }
 
 .portfolio-btn.prev {
   left: 20px;
   background-image: url(../images/icons/left-arrow.svg);
-  background-position: 25% 50%
+  background-position: 25% 50%;
 }
 
 .portfolio-btn.next {
   right: 20px;
   background-image: url(../images/icons/right-arrow.svg);
-  background-position: 75% 50%
+  background-position: 75% 50%;
 }
 
 .portfolio-btn:hover {
-  background-color: rgba(0, 0, 0, .8);
-  -webkit-transition: background-color .2s;
-  transition: background-color .2s
+  background-color: rgba(0, 0, 0, 0.8);
+  -webkit-transition: background-color 0.2s;
+  transition: background-color 0.2s;
 }
 
 .portfolio-dots {
@@ -494,7 +556,7 @@ main a {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
-  z-index: 5
+  z-index: 5;
 }
 
 .portfolio-dots .dot {
@@ -505,114 +567,114 @@ main a {
   border-radius: 50%;
   border: solid #fff;
   display: inline-block;
-  -webkit-transition: background-color, -webkit-transform .4s;
-  transition: background-color, transform .4s, -webkit-transform .4s
+  -webkit-transition: background-color, -webkit-transform 0.4s;
+  transition: background-color, transform 0.4s, -webkit-transform 0.4s;
 }
 
 .portfolio-dots .dot-active {
   background-color: #19b5fe;
   -webkit-transform: scale(1.2);
-  transform: scale(1.2)
+  transform: scale(1.2);
 }
 
 .portfolio-dots .dot:hover {
   background-color: #53c6fe;
   -webkit-transform: scale(1.2);
-  transform: scale(1.2)
+  transform: scale(1.2);
 }
 
 .prove {
   padding: 5rem;
-  background-color: #f2f8f9
+  background-color: #f2f8f9;
 }
 
 .prove img {
   border-bottom: 1px solid #19b5fe;
-  padding-bottom: 1rem
+  padding-bottom: 1rem;
 }
 
 .companies {
-  padding: 5rem
+  padding: 5rem;
 }
 
 .companies .companies-hor {
   width: 100%;
-  margin-bottom: 6.4rem
+  margin-bottom: 6.4rem;
 }
 
 .companies .companies-hor-item {
   margin: 0 1.2rem;
   display: inline-block;
-  height: 140px
+  height: 140px;
 }
 
 .companies img {
-  vertical-align: middle
+  vertical-align: middle;
 }
 
 .command {
   background-color: #f2f8f9;
-  padding: 5.5rem
+  padding: 5.5rem;
 }
 
 .command p {
-  margin-bottom: 5rem
+  margin-bottom: 5rem;
 }
 
 .command .description {
   font-weight: 300;
-  color: #19b5fe
+  color: #19b5fe;
 }
 
 .command .quote {
-  position: relative
+  position: relative;
 }
 
 .command .quote .description {
   font-size: 3rem;
-  color: #000
+  color: #000;
 }
 
 .command .quote p {
-  margin-bottom: 0
+  margin-bottom: 0;
 }
 
 .command .quote span {
   display: inline-block;
   margin-top: 1rem;
   font-family: Roboto, sans-serif;
-  font-weight: 700
+  font-weight: 700;
 }
 
 .command .quote .cov-left {
   position: absolute;
-  top: -.5rem;
-  left: 1.5rem
+  top: -0.5rem;
+  left: 1.5rem;
 }
 
 .command .quote .cov-right {
   position: absolute;
-  bottom: -.5rem;
-  right: 1rem
+  bottom: -0.5rem;
+  right: 1rem;
 }
 
 .command img {
-  margin-bottom: 1rem
+  margin-bottom: 1rem;
 }
 
 .command__photo {
   width: 225px;
-  border-radius: 50%
+  border-radius: 50%;
 }
 
 .calc {
   padding: 5rem;
-  background-color: #f2f8f9
+  background-color: #f2f8f9;
 }
 
 .calc img {
   margin: auto;
-  width: 100%
+  width: 100%;
 }
 
 .calc-block {
@@ -623,7 +685,7 @@ main a {
   flex-wrap: wrap;
   -ms-flex-pack: distribute;
   justify-content: space-around;
-  margin: auto
+  margin: auto;
 }
 
 .calc-item {
@@ -638,7 +700,7 @@ main a {
   font-size: 13px;
   font-weight: 400;
   padding-left: 18px;
-  outline: transparent
+  outline: transparent;
 }
 
 .calc-total {
@@ -650,13 +712,13 @@ main a {
   text-align: left;
   padding: 0 15px;
   line-height: 26px;
-  min-width: 200px
+  min-width: 200px;
 }
 
 .calc-total span {
   float: right;
   font-size: 20px;
-  font-weight: 700
+  font-weight: 700;
 }
 
 .calc-mini {
@@ -664,22 +726,22 @@ main a {
   color: #19b5fe;
   font-size: 12px;
   font-weight: 400;
-  max-width: 435px
+  max-width: 435px;
 }
 
-.calc input[type=number] {
-  -moz-appearance: textfield
+.calc input[type="number"] {
+  -moz-appearance: textfield;
 }
 
-.calc input[type=number]:focus,
-.calc input[type=number]:hover {
-  -moz-appearance: number-input
+.calc input[type="number"]:focus,
+.calc input[type="number"]:hover {
+  -moz-appearance: number-input;
 }
 
-.calc input[type=number]::-webkit-inner-spin-button,
-.calc input[type=number]::-webkit-outer-spin-button {
+.calc input[type="number"]::-webkit-inner-spin-button,
+.calc input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
-  margin: 0
+  margin: 0;
 }
 
 .connect {
@@ -688,36 +750,36 @@ main a {
   background-image: url(../images/connect/connect-bg.jpg);
   background-attachment: fixed;
   background-position: center;
-  color: #fff
+  color: #fff;
 }
 
 .connect .row {
   margin-left: 0;
-  margin-right: 0
+  margin-right: 0;
 }
 
 .connect .form-btn {
-  margin: auto
+  margin: auto;
 }
 
 .connect .description {
   font-weight: 300;
   margin-top: -2rem;
-  margin-bottom: 4rem
+  margin-bottom: 4rem;
 }
 
 .connect .underline {
-  border-bottom: 1px solid #fff
+  border-bottom: 1px solid #fff;
 }
 
 .connect .footer-form .top-form {
   width: 100%;
   height: 4.9rem;
-  border-radius: .7rem;
+  border-radius: 0.7rem;
   font-size: 1.3rem;
   border: none;
   padding-left: 1.7rem;
-  color: #000
+  color: #000;
 }
 
 .connect .footer-form .mess {
@@ -729,7 +791,7 @@ main a {
   padding-left: 1.7rem;
   padding-bottom: 6rem;
   color: #000;
-  height: 10rem
+  height: 10rem;
 }
 
 .connect .footer-form .col-md-12.col-sm-12.col-12 .input-g {
@@ -737,55 +799,54 @@ main a {
   margin-bottom: 2rem;
 }
 
-
 .connect-adress {
-  text-align: left
+  text-align: left;
 }
 
 .connect-adress img,
 .connect-adress p {
-  display: inline-block
+  display: inline-block;
 }
 
 .connect-adress img {
   border: 1px solid #fff;
   border-radius: 3px;
   padding: 5px;
-  margin-right: 1rem
+  margin-right: 1rem;
 }
 
 .connect p {
-  text-align: left
+  text-align: left;
 }
 
 footer {
   background-color: #24241f;
   padding: 5rem;
   text-align: left;
-  color: #fff
+  color: #fff;
 }
 
 footer a {
   font-weight: 300;
-  color: #fff
+  color: #fff;
 }
 
 footer a img {
   text-align: center;
   border: 1px solid #fff;
   border-radius: 3px;
-  padding: .5rem;
+  padding: 0.5rem;
   height: 3rem;
-  width: 3rem
+  width: 3rem;
 }
 
 footer .line {
   margin: 3rem auto;
-  border-bottom: 1px solid #fff
+  border-bottom: 1px solid #fff;
 }
 
 footer .web {
-  text-align: right
+  text-align: right;
 }
 
 .popup {
@@ -797,7 +858,7 @@ footer .web {
   width: 100%;
   height: 100%;
   z-index: 9;
-  background-color: rgba(0, 0, 0, .5)
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .popup .main-form input {
@@ -805,11 +866,11 @@ footer .web {
   left: 0;
   width: 100%;
   margin-right: 0;
-  margin-top: 1.5rem
+  margin-top: 1.5rem;
 }
 
 .popup h3 {
-  color: #fff
+  color: #fff;
 }
 
 .popup .popup-content {
@@ -821,13 +882,13 @@ footer .web {
   -webkit-transform: translateX(-50px);
   transform: translateX(-50px);
   padding: 2rem 6rem;
-  background-color: #24241f
+  background-color: #24241f;
 }
 
 .popup .form-btn {
   width: 100%;
   margin-bottom: 3rem;
-  margin-top: 1.5rem
+  margin-top: 1.5rem;
 }
 
 .popup .popup-close {
@@ -840,7 +901,7 @@ footer .web {
   border: none;
   background: #24241f;
   font-size: 3rem;
-  color: #19b5fe
+  color: #19b5fe;
 }
 
 .thanks-block {
@@ -848,71 +909,71 @@ footer .web {
   background-image: url(../images/main-bg.jpg);
   background-position: center;
   text-align: center;
-  height: 50rem
+  height: 50rem;
 }
 
 .thanks-block h2 {
   color: #19b5fe;
-  margin-bottom: 2rem
+  margin-bottom: 2rem;
 }
 
 .thanks-block h3 {
   font-size: 2rem;
   color: #19b5fe;
-  margin-bottom: 2rem
+  margin-bottom: 2rem;
 }
 
 .thanks-block h4 {
   font-size: 2rem;
-  text-transform: uppercase
+  text-transform: uppercase;
 }
 
 .thanks-block a {
-  color: #fff
+  color: #fff;
 }
 
-@media (max-width:991px) {
+@media (max-width: 991px) {
   body {
-    font-size: 1.5rem
+    font-size: 1.5rem;
   }
 
   body h1 {
-    font-size: 4rem
+    font-size: 4rem;
   }
 
   body h2 {
-    font-size: 3rem
+    font-size: 3rem;
   }
 
   body .main-form input {
-    display: block
+    display: block;
   }
 
   body .connect .col-sm-12 {
-    padding-left: 0
+    padding-left: 0;
   }
 
   body .connect .footer-form input {
     display: block;
-    margin-bottom: 1rem
+    margin-bottom: 1rem;
   }
 
   body .form-btn {
-    margin-left: 0
+    margin-left: 0;
   }
 
   main header .phone-media .phone {
-    font-size: 1.8rem
+    font-size: 1.8rem;
   }
 
   main .description {
-    margin-bottom: 2rem
+    margin-bottom: 2rem;
   }
 
   main .main-form-input {
     width: 100%;
     border: none;
-    height: auto
+    height: auto;
   }
 
   main .main-form-input input {
@@ -921,285 +982,285 @@ footer .web {
     display: inline-block;
     text-align: center;
     margin-bottom: 1rem;
-    padding-left: 0
+    padding-left: 0;
   }
 
   main .main-form .form-btn {
     margin: auto;
     -webkit-transform: translateY(0);
-    transform: translateY(0)
+    transform: translateY(0);
   }
 
   .service-inner {
-    padding: 0
+    padding: 0;
   }
 
   .service img {
-    margin-bottom: 5rem
+    margin-bottom: 5rem;
   }
 
   .portfolio-content {
     height: 565px;
-    width: 100%
+    width: 100%;
   }
 
   .portfolio a {
-    font-size: 1.2rem
+    font-size: 1.2rem;
   }
 
   .portfolio .row {
-    display: none
+    display: none;
   }
 
   .portfolio .slider {
     display: inline-block;
-    width: 360px
+    width: 360px;
   }
 
   .process p {
-    font-size: 2.3rem
+    font-size: 2.3rem;
   }
 
   .calc-mini {
-    max-width: 100%
+    max-width: 100%;
   }
 }
 
-@media (max-width:767px) {
+@media (max-width: 767px) {
   body {
-    font-size: 1.3rem
+    font-size: 1.3rem;
   }
 
   body ul {
-    line-height: 3
+    line-height: 3;
   }
 
   body li a {
-    font-size: 1.5rem
+    font-size: 1.5rem;
   }
 
   body .underline {
-    width: 30rem
+    width: 30rem;
   }
 
   body h1 {
-    font-size: 3.3rem
+    font-size: 3.3rem;
   }
 
   body h2 {
-    font-size: 2.5rem
+    font-size: 2.5rem;
   }
 
   body .description {
-    font-size: 2rem
+    font-size: 2rem;
   }
 
   main a {
-    margin: 1rem auto
+    margin: 1rem auto;
   }
 
   main header {
     padding-top: 1rem;
-    padding-bottom: 1rem
+    padding-bottom: 1rem;
   }
 
   main header .phone-media {
     text-align: left;
-    line-height: 1.5rem
+    line-height: 1.5rem;
   }
 
   main header .phone-media .phone {
     font-family: Roboto, sans-serif;
     font-size: 1.3rem;
-    font-weight: 700
+    font-weight: 700;
   }
 
   .service .description,
   main .main-form .form-btn {
-    margin-top: 3rem
+    margin-top: 3rem;
   }
 
   .service-inner {
-    padding: 0
+    padding: 0;
   }
 
   .portfolio {
-    height: 100%
+    height: 100%;
   }
 
   .portfolio-content {
-    height: 400px
+    height: 400px;
   }
 
   .portfolio-dots {
-    display: none
+    display: none;
   }
 
   .portfolio a {
-    font-size: 1rem
+    font-size: 1rem;
   }
 
   .portfolio .tabs ul {
-    border: none
+    border: none;
   }
 
   .portfolio .tabs ul li {
     margin-bottom: 1rem;
     border: 1px solid #19b5fe;
-    border-radius: 3rem
+    border-radius: 3rem;
   }
 
   .process .circle {
     display: block;
-    margin: 0 auto
+    margin: 0 auto;
   }
 
   .process p {
     padding: 0;
     margin-top: 0;
-    margin-bottom: 3rem
+    margin-bottom: 3rem;
   }
 
   .command .quote img,
   .process img {
-    display: none
+    display: none;
   }
 
   .connect .col-sm-12 {
-    padding-right: 0
+    padding-right: 0;
   }
 
   .connect .form-btn {
     width: 100%;
     height: 5rem;
     font-size: 1.3rem;
-    margin-bottom: 1rem
+    margin-bottom: 1rem;
   }
 
   footer .web {
-    text-align: left
+    text-align: left;
   }
 
   .popup .popup-content {
-    left: 30%
+    left: 30%;
   }
 }
 
-@media (max-width:690px) {
+@media (max-width: 690px) {
   body .form-btn {
-    height: 4rem
+    height: 4rem;
   }
 
   .popup-content {
-    left: 25%
+    left: 25%;
   }
 
   .portfolio-btn {
     width: 40px;
-    height: 40px
+    height: 40px;
   }
 
   .portfolio-btn.next {
-    right: 10px
+    right: 10px;
   }
 
   .portfolio-btn.prev {
-    left: 10px
+    left: 10px;
   }
 }
 
-@media (max-width:575px) {
+@media (max-width: 575px) {
   .service img {
-    display: none
+    display: none;
   }
 
   .calc-mini {
-    max-width: 330px
+    max-width: 330px;
   }
 }
 
-@media (max-width:500px) {
+@media (max-width: 500px) {
   .popup .popup-content {
-    left: 18%
+    left: 18%;
   }
 
   .portfolio-content {
-    height: 240px
+    height: 240px;
   }
 }
 
-@media (max-width:448px) {
+@media (max-width: 448px) {
   body nav {
-    width: 100%
+    width: 100%;
   }
 
   body .active-menu {
     -webkit-transform: translateX(0);
-    transform: translateX(0)
+    transform: translateX(0);
   }
 
   body .underline {
-    width: 100%
+    width: 100%;
   }
 
   body h1 {
-    font-size: 2.2rem
+    font-size: 2.2rem;
   }
 
   body h2 {
-    font-size: 2rem
+    font-size: 2rem;
   }
 
   body .description {
-    font-size: 1.5rem
+    font-size: 1.5rem;
   }
 
   main header {
-    padding-bottom: 0
+    padding-bottom: 0;
   }
 
   main header .phone-media img,
   main header .phone-media small {
-    display: none
+    display: none;
   }
 
   main header .menu,
   main header .phone-media .phone {
-    margin-top: 1rem
+    margin-top: 1rem;
   }
 
   main header .menu small {
-    display: none
+    display: none;
   }
 
   .service .form-btn {
     width: 16rem;
-    height: 5rem
+    height: 5rem;
   }
 
   .process p {
-    font-size: 1.8rem
+    font-size: 1.8rem;
   }
 
   .command img {
-    width: 100%
+    width: 100%;
   }
 
   .popup .popup-content {
     left: 15%;
-    width: 100%
+    width: 100%;
   }
 
   .portfolio-btn {
     width: 35px;
-    height: 35px
+    height: 35px;
   }
 
   .portfolio-btn.next {
-    right: 5px
+    right: 5px;
   }
 
   .portfolio-btn.prev {
-    left: 5px
+    left: 5px;
   }
 }

@@ -390,10 +390,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	const sendForm = form => {
 		const errorMessage = 'Что то пошло не так...',
-			loadMessage = 'Загрузка...',
 			succesMessge = 'Спасибо! Мы скоро с Вами свяжемся';
 
 		const statusMessage = document.createElement('div'); // создаем еэлемент для оповещения хода загрузки
+		statusMessage.classList.add('preload-container');
 		statusMessage.style.cssText = `
 			font-size: 1.6rem;
 			color: #fff;
@@ -486,12 +486,30 @@ window.addEventListener('DOMContentLoaded', () => {
 				errorValidation(emailInput);
 			}
 			if (telPatern.test(telInput.value) && emailPatern.test(emailInput.value)) {
-				statusMessage.textContent = loadMessage;
+				statusMessage.innerHTML = `
+					<div class="bubbles">
+						<div class="bubble">
+							<div class="circle"></div>
+						</div>
+						<div class="bubble">
+							<div class="circle"></div>
+						</div><div class="bubble">
+							<div class="circle"></div>
+						</div><div class="bubble">
+							<div class="circle"></div>
+						</div><div class="bubble">
+							<div class="circle"></div>
+						</div><div class="bubble">
+							<div class="circle"></div>
+						</div>
+					</div>
+
+				`;
 
 				postData(
 					body,
-					() => (statusMessage.textContent = succesMessge),
-					() => (statusMessage.textContent = errorMessage)
+					() => (statusMessage.innerHTML = succesMessge),
+					() => (statusMessage.innerHTML = errorMessage)
 				);
 			}
 		});
