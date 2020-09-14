@@ -2,13 +2,52 @@
 <html lang="ru">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="style.css">
+	<title>Document</title>
 </head>
 
 <body>
-  <script src="script.js"></script>
+
+	<div id="preloader-wapper">
+		<div class="loader-middle"></div>
+	</div>
+
+	<div class="intro">
+
+		<div class="intro__media">
+			<video src="video.mp4" class="intro__media-video" autoplay muted loop></video>
+		</div>
+
+		<div class="intro__content">
+			<h1 class="intro__title">Супергерои Ваших любимых фильмов</h1>
+		</div>
+
+		<a href="#main_block" class="to_down">
+			<img src="down.svg" alt="down">
+		</a>
+	</div>
+
+	<div class="main-block" id="main_block">
+		<h2 class="main-title">Выбери название фильма из списка</h2>
+
+		<div class="select">
+			<div class="select__header">
+				<span class="select__current">Список фильмов</span>
+				<div class="select__icon">&times;</div>
+			</div>
+
+			<div class="select__body"></div>
+
+		</div>
+
+		<div class="card__wraper"></div>
+
+	</div>
+
+	<script src="script.js"></script>
 </body>
 
 </html>
