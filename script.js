@@ -430,30 +430,30 @@ window.addEventListener('DOMContentLoaded', () => {
 		};
 
 		// функция обработки запроса на сервер
-		const postData = (body, outputData, errorData) => {
-			const request = new XMLHttpRequest();
-			// слушатель на статус отправки запроса
-			request.addEventListener('readystatechange', () => {
-				if (request.readyState !== 4) return;
+		const postData = body =>
+			new Promise((resolve, reject) => {
+				const request = new XMLHttpRequest();
+				// слушатель на статус отправки запроса
+				request.addEventListener('readystatechange', () => {
+					if (request.readyState !== 4) return;
 
-				if (request.status === 200) {
-					form.reset();
-					outputData();
-				} else {
-					errorData();
-				}
+					if (request.status === 200) {
+						resolve();
+					} else {
+						reject();
+					}
+				});
+
+				request.open('POST', 'server.php');
+				//!! вариант с JSON
+				request.setRequestHeader('Content-Type', 'application/json');
+				request.send(JSON.stringify(body));
+
+				//!! вариант с FormData
+				// request.setRequestHeader('Content-Type', 'multipart/form-data');
+
+				// request.send(formData);
 			});
-
-			request.open('POST', 'server.php');
-			//!! вариант с JSON
-			request.setRequestHeader('Content-Type', 'application/json');
-			request.send(JSON.stringify(body));
-
-			//!! вариант с FormData
-			// request.setRequestHeader('Content-Type', 'multipart/form-data');
-
-			// request.send(formData);
-		};
 
 		// слушатель на отправку формы
 		form.addEventListener('submit', event => {
@@ -506,11 +506,14 @@ window.addEventListener('DOMContentLoaded', () => {
 
 				`;
 
-				postData(
-					body,
-					() => (statusMessage.innerHTML = succesMessge),
-					() => (statusMessage.innerHTML = errorMessage)
-				);
+				postData(body)
+					.then(() => {
+						form.reset();
+						statusMessage.innerHTML = succesMessge;
+					})
+					.catch(() => {
+						statusMessage.innerHTML = errorMessage;
+					});
 			}
 		});
 
