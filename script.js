@@ -20,89 +20,50 @@ window.addEventListener('load', () => {
 });
 
 window.addEventListener('DOMContentLoaded', () => {
-	// кастомный селект
+	// показываем развернутое описание карточки
+	const showCard = data => {
+		const cards = document.querySelectorAll('.card'),
+			cardDescription = document.querySelector('.card__description'),
+			cardBlock = cardDescription.querySelector('.card__block'),
+			cardPhoto = document.querySelector('.card__photo');
 
-	let select = data => {
-		let selectHeader = document.querySelectorAll('.select__header'),
-			selectItem = document.querySelectorAll('.select__item');
+		cards.forEach(item => {
+			item.addEventListener('click', event => {
+				const target = event.target,
+					header = target.querySelector('.card__title').textContent;
 
-		const selectToggle = event => {
-			let target = event.target;
-			target.parentElement.classList.toggle('is-active');
-		};
+				event.preventDefault();
+				cardBlock.innerHTML = '';
 
-		const selectChoose = event => {
-			let target = event.target;
-			let text = target.textContent,
-				select = target.closest('.select'),
-				currentText = select.querySelector('.select__current');
-			currentText.textContent = text;
-			select.classList.remove('is-active');
-			addCard(data);
-		};
+				const heroData = data.filter(item => item.name === header);
+				const [ heroElem ] = heroData;
 
-		selectHeader.forEach(item => {
-			item.addEventListener('click', selectToggle);
-		});
-
-		selectItem.forEach(item => {
-			item.addEventListener('click', selectChoose);
-		});
-	};
-
-	// запрос на сервер
-
-	const addToSelect = data => {
-		const selectBody = document.querySelector('.select__body');
-		let moviesData = [];
-
-		data.filter(item => {
-			if (item.movies) {
-				moviesData.push(...item.movies);
-			}
-		});
-
-		const allMovies = [ ...new Set(moviesData) ];
-
-		allMovies.forEach(item => {
-			selectBody.insertAdjacentHTML(
-				'afterbegin',
-				`
-                <div class="select__item">${item}</div>
-            `
-			);
-		});
-	};
-
-	const getData = () => {
-		return new Promise((resolve, reject) => {
-			const request = new XMLHttpRequest();
-			request.open('GET', './dbHeroes.json');
-			request.setRequestHeader('Content-type', 'application/json');
-			request.addEventListener('readystatechange', () => {
-				if (request.readyState !== 4) {
-					return;
+				for (const key in heroElem) {
+					if (key !== 'photo') {
+						cardBlock.insertAdjacentHTML(
+							'beforeend',
+							`
+							<p>${key}: <span class="text__bold">${heroElem[key]}</span></p>
+							`
+						);
+					} else {
+						cardPhoto.style.cssText = `background-image: url("${heroElem[key]}")`;
+					}
 				}
 
-				if (request.status === 200) {
-					const data = JSON.parse(request.responseText);
-					resolve(data);
-				} else {
-					reject(request.status);
-					// output.innerHTML = 'Произошла ошибка';
-				}
+				cardDescription.classList.add('card__active');
 			});
-			request.send();
 		});
 	};
 
+	// добавление карточек
 	const addCard = data => {
 		const selectCurrent = document.querySelector('.select__current'),
 			cardWraper = document.querySelector('.card__wraper');
 
 		cardWraper.innerHTML = '';
 
-		let newData = data.filter(item => {
+		const newData = data.filter(item => {
 			if (item.movies && item.movies.includes(selectCurrent.textContent)) {
 				return item;
 			}
@@ -129,41 +90,69 @@ window.addEventListener('DOMContentLoaded', () => {
 		showCard(data);
 	};
 
-	const showCard = data => {
-		const cards = document.querySelectorAll('.card'),
-			cardDescription = document.querySelector('.card__description'),
-			cardBlock = cardDescription.querySelector('.card__block'),
-			cardPhoto = document.querySelector('.card__photo');
+	// кастомный селект
+	const customSelect = data => {
+		const selectHeader = document.querySelector('.select__header'),
+			selectItem = document.querySelectorAll('.select__item'),
+			selectBtn = document.querySelector('.select__btn'),
+			select = document.querySelector('.select');
 
-		cards.forEach(item => {
-			item.addEventListener('click', event => {
-				const target = event.target,
-					header = target.querySelector('.card__title').textContent;
+		const remove = () => {
+			select.classList.remove('is-active');
+			selectBtn.classList.remove('select__btn_active');
+		};
 
-				event.preventDefault();
-				cardBlock.innerHTML = '';
+		const selectToggle = () => {
+			select.classList.toggle('is-active');
+			selectBtn.classList.toggle('select__btn_active');
+		};
 
-				const heroData = data.filter(item => item.name === header);
-				const [ heroElem ] = heroData;
+		const selectChoose = event => {
+			const target = event.target;
+			const text = target.textContent,
+				currentText = select.querySelector('.select__current');
+			currentText.textContent = text;
+			remove();
+			addCard(data);
+		};
 
-				for (let key in heroElem) {
-					if (key !== 'photo') {
-						cardBlock.insertAdjacentHTML(
-							'beforeend',
-							`
-							<p>${key}: <span class="text__bold">${heroElem[key]}</span></p>
-							`
-						);
-					} else {
-						cardPhoto.style.cssText = `background-image: url("${heroElem[key]}")`;
-					}
-				}
+		selectHeader.addEventListener('click', selectToggle);
 
-				cardDescription.classList.add('card__active');
-			});
+		document.addEventListener('click', event => {
+			const target = event.target;
+
+			if (!target.closest('.select') && select.classList.contains('is-active')) {
+				remove();
+			}
+		});
+		selectItem.forEach(item => {
+			item.addEventListener('click', selectChoose);
+		});
+	};
+	// добавление из data в селект
+	const addToSelect = data => {
+		const selectBody = document.querySelector('.select__body');
+		const moviesData = [];
+
+		data.filter(item => {
+			if (item.movies) {
+				moviesData.push(...item.movies);
+			}
+		});
+
+		const allMovies = [ ...new Set(moviesData) ];
+
+		allMovies.forEach(item => {
+			selectBody.insertAdjacentHTML(
+				'afterbegin',
+				`
+                <div class="select__item">${item}</div>
+            `
+			);
 		});
 	};
 
+	// функция закрытия карточки
 	const closeCard = () => {
 		const card = document.querySelector('.card__description');
 
@@ -174,18 +163,46 @@ window.addEventListener('DOMContentLoaded', () => {
 				card.classList.remove('card__active');
 			}
 		});
+		window.addEventListener('keyup', event => {
+			if (event.key === 'Escape') {
+				card.classList.remove('card__active');
+			}
+		});
 	};
 
-	const init = () => {
-		getData()
+	closeCard();
+
+	// скролл
+	const scroll = () => {
+		const anchor = document.querySelector('.to_down');
+
+		anchor.addEventListener('click', event => {
+			event.preventDefault();
+
+			const blockID = anchor.getAttribute('href'),
+				idElem = document.querySelector(blockID);
+			if (idElem) {
+				const idElemY = idElem.offsetTop;
+				window.scrollTo({
+					top: idElemY,
+					behavior: 'smooth'
+				});
+			}
+		});
+	};
+
+	scroll();
+
+	// запрос на сервер
+	const getData = () =>
+		fetch('./dbHeroes.json')
+			.then(response => response.json())
 			.then(data => {
 				addToSelect(data);
-				select(data);
+				customSelect(data);
 				addCard(data);
 			})
 			.catch(err => console.log(err));
-	};
 
-	init();
-	closeCard();
+	getData();
 });
