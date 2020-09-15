@@ -431,28 +431,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
 		// функция обработки запроса на сервер
 		const postData = body =>
-			new Promise((resolve, reject) => {
-				const request = new XMLHttpRequest();
-				// слушатель на статус отправки запроса
-				request.addEventListener('readystatechange', () => {
-					if (request.readyState !== 4) return;
-
-					if (request.status === 200) {
-						resolve();
-					} else {
-						reject();
-					}
-				});
-
-				request.open('POST', 'server.php');
-				//!! вариант с JSON
-				request.setRequestHeader('Content-Type', 'application/json');
-				request.send(JSON.stringify(body));
-
-				//!! вариант с FormData
-				// request.setRequestHeader('Content-Type', 'multipart/form-data');
-
-				// request.send(formData);
+			fetch('server.php', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(body)
 			});
 
 		// слушатель на отправку формы
@@ -467,7 +451,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
 			const formData = new FormData(form);
 
-			//!! вариант с JSON
 			const body = {};
 
 			formData.forEach((val, key) => {
@@ -507,12 +490,19 @@ window.addEventListener('DOMContentLoaded', () => {
 				`;
 
 				postData(body)
-					.then(() => {
+					.then(response => {
+						if (response.status !== 200) {
+							throw new Error('status network not 200');
+						}
 						form.reset();
 						statusMessage.innerHTML = succesMessge;
+						setTimeout(() => {
+							statusMessage.remove();
+						}, 5000);
 					})
-					.catch(() => {
+					.catch(error => {
 						statusMessage.innerHTML = errorMessage;
+						console.error(error);
 					});
 			}
 		});
