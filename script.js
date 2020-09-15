@@ -104,20 +104,75 @@ window.addEventListener('DOMContentLoaded', () => {
 
 		let newData = data.filter(item => {
 			if (item.movies && item.movies.includes(selectCurrent.textContent)) {
-				console.log(item);
 				return item;
 			}
 		});
 
-		newData.forEach(item => {
-			cardWraper.insertAdjacentHTML(
-				'afterbegin',
-				`
+		const addCardFun = elem => {
+			elem.forEach(item => {
+				cardWraper.insertAdjacentHTML(
+					'afterbegin',
+					`
 			    <a href="#" class="card" style="background-image: url('${item.photo}')">
 			        <h3 class="card__title">${item.name}</h3>
 			    </a>
 			`
-			);
+				);
+			});
+		};
+
+		if (selectCurrent.textContent !== 'Список фильмов') {
+			addCardFun(newData);
+		} else {
+			addCardFun(data);
+		}
+		showCard(data);
+	};
+
+	const showCard = data => {
+		const cards = document.querySelectorAll('.card'),
+			cardDescription = document.querySelector('.card__description'),
+			cardBlock = cardDescription.querySelector('.card__block'),
+			cardPhoto = document.querySelector('.card__photo');
+
+		cards.forEach(item => {
+			item.addEventListener('click', event => {
+				const target = event.target,
+					header = target.querySelector('.card__title').textContent;
+
+				event.preventDefault();
+				cardBlock.innerHTML = '';
+
+				const heroData = data.filter(item => item.name === header);
+				const [ heroElem ] = heroData;
+
+				for (let key in heroElem) {
+					if (key !== 'photo') {
+						cardBlock.insertAdjacentHTML(
+							'beforeend',
+							`
+							<p>${key}: <span class="text__bold">${heroElem[key]}</span></p>
+							`
+						);
+					} else {
+						cardPhoto.style.cssText = `background-image: url("${heroElem[key]}")`;
+					}
+				}
+
+				cardDescription.classList.add('card__active');
+			});
+		});
+	};
+
+	const closeCard = () => {
+		const card = document.querySelector('.card__description');
+
+		card.addEventListener('click', event => {
+			const target = event.target;
+
+			if (target.matches('.card__close') || target.matches('.card__description')) {
+				card.classList.remove('card__active');
+			}
 		});
 	};
 
@@ -126,11 +181,11 @@ window.addEventListener('DOMContentLoaded', () => {
 			.then(data => {
 				addToSelect(data);
 				select(data);
-				// change(data);
-				console.log(data);
+				addCard(data);
 			})
 			.catch(err => console.log(err));
 	};
 
 	init();
+	closeCard();
 });

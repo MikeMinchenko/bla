@@ -15,7 +15,6 @@ html {
 
 body {
     margin: 0;
-
 }
 
 * {
@@ -194,21 +193,19 @@ body {
     align-items: center;
 }
 
-
-
 .intro__media {
     position: absolute;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background: #ccc url('video-replace.jpg') no-repeat center center;
+    background: #ccc url("video-replace.jpg") no-repeat center center;
     background-size: cover;
     overflow: hidden;
 }
 
 .intro__media::before {
-    content: '';
+    content: "";
     position: absolute;
     width: 100%;
     height: 100%;
@@ -234,10 +231,9 @@ body {
     transform: translate(-50%, -50%);
 }
 
-
 .intro__title,
 .main-title {
-    font-family: 'Caveat', cursive;
+    font-family: "Caveat", cursive;
     font-size: 60px;
     margin: 0;
 }
@@ -250,7 +246,6 @@ body {
     z-index: 10;
     width: 30px;
     height: 17px;
-
 }
 
 .to_down {
@@ -327,7 +322,7 @@ body {
 }
 
 .main-title {
-    font-family: 'Caveat', cursive;
+    font-family: "Caveat", cursive;
     font-size: 45px;
     margin-bottom: 30px;
 }
@@ -419,7 +414,7 @@ body {
 }
 
 .card::after {
-    content: '';
+    content: "";
     position: absolute;
     width: 100%;
     height: 100%;
@@ -430,9 +425,72 @@ body {
 
 .card__title {
     color: #fff;
-    font-family: 'Caveat', cursive;
+    font-family: "Caveat", cursive;
     font-size: 50px;
     z-index: 10;
     margin: 0;
     margin-bottom: 10px;
+}
+
+.card__description {
+    opacity: 0;
+    visibility: hidden;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(27, 27, 27, 0.692);
+    z-index: 100;
+    transition: all 0.3s;
+}
+.card__content {
+    position: relative;
+    max-width: 900px;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    color: rgb(53, 52, 52);
+    font-size: 25px;
+}
+.card__photo {
+    max-width: 300px;
+    width: 100%;
+    font-family: "Lato", sans-serif;
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+}
+.card__block {
+    width: 100%;
+    padding: 25px;
+}
+.card__block p {
+    margin: 10px 0;
+}
+
+.card__header {
+    margin: 0;
+    font-size: 50px;
+}
+.text__bold {
+    font-weight: 700;
+    font-style: italic;
+    /* font-family: "Caveat", cursive; */
+    font-size: 25px;
+}
+.card__active {
+    opacity: 1;
+    visibility: visible;
+}
+.card__close {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    cursor: pointer;
 }
