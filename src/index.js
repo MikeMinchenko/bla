@@ -22,7 +22,7 @@ import calculator from './modules/calculator';
 import sendForm from './modules/sendForm';
 
 // таймер
-countTimer('2 september 2020');
+countTimer('18 september 2020');
 // меню
 toogleMenu();
 // модальное окно
