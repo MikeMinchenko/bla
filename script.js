@@ -10,6 +10,7 @@ window.addEventListener('load', () => {
 			loaderMiddle.classList.add('loaded');
 			setTimeout(() => {
 				loadWraper.classList.add('loaded');
+
 				setTimeout(() => {
 					loadWraper.remove();
 				}, 500);
@@ -42,19 +43,36 @@ window.addEventListener('DOMContentLoaded', () => {
 				const [ heroElem ] = heroData;
 
 				for (const key in heroElem) {
-					if (key !== 'photo') {
+					if (key !== 'photo' && key !== 'movies') {
 						cardBlock.insertAdjacentHTML(
 							'beforeend',
 							`
-							<p>${key}: <span class="text__bold">${heroElem[key]}</span></p>
+							<p>${key}:  <span class="text__bold">${heroElem[key]}</span></p>
 							`
 						);
+					} else if (key === 'movies') {
+						let movies = '';
+						heroElem[key].forEach((item, index) => {
+							if (index !== heroElem[key].length - 1) {
+								movies += `${item},&nbsp `;
+							} else {
+								movies += item;
+							}
+						});
+						cardBlock.insertAdjacentHTML(
+							'beforeend',
+							`
+							<p>${key}:  <span class="text__bold">${movies}</span></p>
+							`
+						);
+						console.log(movies);
 					} else {
 						cardPhoto.style.cssText = `background-image: url("${heroElem[key]}")`;
 					}
 				}
 
 				cardDescription.classList.add('card__active');
+				document.querySelector('body').style.cssText = 'overflow: hidden';
 			});
 		});
 	};
@@ -170,11 +188,13 @@ window.addEventListener('DOMContentLoaded', () => {
 
 			if (target.matches('.card__close') || target.matches('.card__description')) {
 				card.classList.remove('card__active');
+				document.querySelector('body').removeAttribute('style');
 			}
 		});
 		window.addEventListener('keyup', event => {
 			if (event.key === 'Escape') {
 				card.classList.remove('card__active');
+				document.querySelector('body').removeAttribute('style');
 			}
 		});
 	};

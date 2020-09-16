@@ -20,7 +20,11 @@ body {
 * {
 	box-sizing: border-box;
 }
-
+.container {
+	max-width: 1400px;
+	width: 95%;
+	margin: auto;
+}
 /* preloader */
 
 #preloader-wapper {
@@ -319,6 +323,7 @@ body {
 	padding-top: 120px;
 	padding-bottom: 60px;
 	text-align: center;
+	min-height: 950px;
 }
 
 .main-title {
@@ -374,8 +379,6 @@ body {
 }
 
 .card__wraper {
-	max-width: 90%;
-	width: 1400px;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
@@ -397,6 +400,9 @@ body {
 	margin: 15px 15px;
 	border-radius: 20px;
 	overflow: hidden;
+	-webkit-box-shadow: 0px 0px 17px -1px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: 0px 0px 17px -1px rgba(0, 0, 0, 0.75);
+	box-shadow: 0px 0px 17px -1px rgba(0, 0, 0, 0.75);
 }
 
 .card::after {
@@ -432,6 +438,7 @@ body {
 	background-color: rgba(27, 27, 27, 0.692);
 	z-index: 100;
 	transition: all 0.3s;
+	padding: 0 15px;
 }
 
 .card__content {
@@ -443,13 +450,16 @@ body {
 	overflow: hidden;
 	display: flex;
 	color: rgb(53, 52, 52);
-	font-size: 25px;
+	font-size: 22px;
+	-webkit-box-shadow: 0px 0px 17px -1px rgba(209, 148, 158, 1);
+	-moz-box-shadow: 0px 0px 17px -1px rgba(209, 148, 158, 1);
+	box-shadow: 0px 0px 17px -1px rgba(209, 148, 158, 1);
 }
 
 .card__photo {
 	max-width: 300px;
 	width: 100%;
-	font-family: "Lato", sans-serif;
+
 	background-size: cover;
 	background-position: top center;
 	background-repeat: no-repeat;
@@ -458,10 +468,12 @@ body {
 .card__block {
 	width: 100%;
 	padding: 25px;
+	text-align: left;
 }
 
 .card__block p {
 	margin: 10px 0;
+	line-height: 1.2;
 }
 
 .card__header {
@@ -472,8 +484,6 @@ body {
 .text__bold {
 	font-weight: 700;
 	font-style: italic;
-	/* font-family: "Caveat", cursive; */
-	font-size: 25px;
 }
 
 .card__active {
@@ -535,4 +545,44 @@ body {
 
 .select__btn_active span:after {
 	transform: rotate(-45deg);
+}
+
+@media screen and (max-width: 700px) {
+	.intro__title {
+		font-size: 50px;
+		margin: 0 15px;
+	}
+	.mai-title {
+		font-size: 40px;
+	}
+	.main-block {
+		padding-top: 60px;
+	}
+}
+
+@media screen and (max-width: 830px) {
+	.card__content {
+		font-size: 18px;
+	}
+	.card__block p {
+		margin: 5px 0;
+		line-height: 1.4;
+	}
+}
+@media screen and (max-width: 575px) {
+	.card__close {
+		color: #fff;
+	}
+	.card__content {
+		max-width: 400px;
+		display: flex;
+		flex-direction: column;
+	}
+	.card__photo {
+		height: 255px;
+		max-width: 100%;
+	}
+	.card__block {
+		padding: 15px;
+	}
 }
