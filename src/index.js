@@ -1,14 +1,19 @@
 import 'nodelist-foreach-polyfill';
 import '@babel/polyfill';
 import 'mdn-polyfills/Node.prototype.append';
-import 'fetch-polyfill';
+import 'mdn-polyfills/Node.prototype.remove';
+import 'cross-fetch/polyfill';
+import 'formdata-polyfill';
 import elementClosest from 'element-closest';
 elementClosest(window);
+import smoothscroll from 'smoothscroll-polyfill';
+smoothscroll.polyfill();
 
 import countTimer from './modules/countTimer';
 import toogleMenu from './modules/toogleMenu';
 import tooglePopup from './modules/tooglePopup';
 import tabs from './modules/tabs';
+import scroll from './modules/scroll';
 import slider from './modules/slider';
 import changeImage from './modules/changeImage';
 import calculator from './modules/calculator';
