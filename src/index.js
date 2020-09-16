@@ -1,3 +1,10 @@
+import 'nodelist-foreach-polyfill';
+import '@babel/polyfill';
+import 'mdn-polyfills/Node.prototype.append';
+import 'fetch-polyfill';
+import elementClosest from 'element-closest';
+elementClosest(window);
+
 import countTimer from './modules/countTimer';
 import toogleMenu from './modules/toogleMenu';
 import tooglePopup from './modules/tooglePopup';
