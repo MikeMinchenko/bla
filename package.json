@@ -1,0 +1,22 @@
+{
+  "name": "JS_Glo",
+  "version": "1.0.0",
+  "description": "",
+
+
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/from0toweb/JS_Glo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/from0toweb/JS_Glo/issues"
+  },
+  "homepage": "https://github.com/from0toweb/JS_Glo#readme",
+  "devDependencies": {
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  }
+}
