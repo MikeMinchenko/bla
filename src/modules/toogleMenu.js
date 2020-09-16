@@ -8,12 +8,13 @@ const toogleMenu = () => {
 
 	document.addEventListener('click', event => {
 		const target = event.target;
-		if (target === closeBtn || target.closest('menu>ul')) {
+		if (target === closeBtn) {
 			handlerMenu();
-		} else if (target.closest('.menu')) {
+		} else if (target.closest('.menu') && !target.closest('li')) {
 			handlerMenu();
-		} else if (target !== menu) {
+		} else if (target !== menu && !target.closest('li')) {
 			menu.classList.remove('active-menu');
+			console.log(target);
 		}
 	});
 };
