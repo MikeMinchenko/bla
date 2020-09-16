@@ -20,6 +20,9 @@ window.addEventListener('load', () => {
 });
 
 window.addEventListener('DOMContentLoaded', () => {
+	// запрос на сервер
+	const getData = () => fetch('./dbHeroes.json');
+
 	// показываем развернутое описание карточки
 	const showCard = data => {
 		const cards = document.querySelectorAll('.card'),
@@ -91,7 +94,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	};
 
 	// кастомный селект
-	const customSelect = data => {
+	const customSelect = () => {
 		const selectHeader = document.querySelector('.select__header'),
 			selectItem = document.querySelectorAll('.select__item'),
 			selectBtn = document.querySelector('.select__btn'),
@@ -113,7 +116,13 @@ window.addEventListener('DOMContentLoaded', () => {
 				currentText = select.querySelector('.select__current');
 			currentText.textContent = text;
 			remove();
-			addCard(data);
+			getData()
+				.then(response => response.json())
+				.then(data => {
+					addCard(data);
+					console.log(data);
+				})
+				.catch(err => console.log(err));
 		};
 
 		selectHeader.addEventListener('click', selectToggle);
@@ -193,16 +202,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	scroll();
 
-	// запрос на сервер
-	const getData = () =>
-		fetch('./dbHeroes.json')
-			.then(response => response.json())
-			.then(data => {
-				addToSelect(data);
-				customSelect(data);
-				addCard(data);
-			})
-			.catch(err => console.log(err));
-
-	getData();
+	getData()
+		.then(response => response.json())
+		.then(data => {
+			addToSelect(data);
+			customSelect();
+			addCard(data);
+		})
+		.catch(err => console.log(err));
 });
