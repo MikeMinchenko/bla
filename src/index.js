@@ -1,3 +1,4 @@
+// полифилы
 import 'nodelist-foreach-polyfill';
 import '@babel/polyfill';
 import 'mdn-polyfills/Node.prototype.append';
@@ -9,6 +10,7 @@ elementClosest(window);
 import smoothscroll from 'smoothscroll-polyfill';
 smoothscroll.polyfill();
 
+// импорт модулей
 import countTimer from './modules/countTimer';
 import toogleMenu from './modules/toogleMenu';
 import tooglePopup from './modules/tooglePopup';
