@@ -20,6 +20,7 @@ import slider from './modules/slider';
 import changeImage from './modules/changeImage';
 import calculator from './modules/calculator';
 import sendForm from './modules/sendForm';
+import SliderCarousel from './modules/SliderCarousel';
 
 // таймер
 countTimer('18 september 2020');
@@ -43,3 +44,28 @@ const forms = document.querySelectorAll('form');
 forms.forEach(item => {
 	sendForm(item);
 });
+
+const corousel = new SliderCarousel({
+	main: '.companies-wrapper',
+	wrap: '.companies-hor',
+	// prev: '#test-left',
+	// next: '#test-right',
+	slidesToShow: 4,
+	infinity: true,
+	response: [
+		{
+			breakpoint: 1024,
+			slidesToShow: 3
+		},
+		{
+			breakpoint: 768,
+			slidesToShow: 2
+		},
+		{
+			breakpoint: 576,
+			slidesToShow: 1
+		}
+	]
+});
+
+corousel.init();

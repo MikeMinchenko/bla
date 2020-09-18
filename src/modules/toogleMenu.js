@@ -14,7 +14,6 @@ const toogleMenu = () => {
 			handlerMenu();
 		} else if (target !== menu && !target.closest('li')) {
 			menu.classList.remove('active-menu');
-			console.log(target);
 		}
 	});
 };
