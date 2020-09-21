@@ -1,0 +1,85 @@
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  z-index: 99;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.95);
+}
+
+.bubbles {
+  position: relative;
+}
+
+.bubble {
+  display: inline-block;
+  padding: 0px 5px;
+}
+
+.bubble:nth-of-type(1) .circle {
+  animation-delay: 0.1s;
+}
+
+.bubble:nth-of-type(2) .circle {
+  animation-delay: 0.2s;
+}
+
+.bubble:nth-of-type(3) .circle {
+  animation-delay: 0.3s;
+}
+
+.bubble:nth-of-type(4) .circle {
+  animation-delay: 0.4s;
+}
+
+.bubble:nth-of-type(5) .circle {
+  animation-delay: 0.5s;
+}
+
+.bubble:nth-of-type(6) .circle {
+  animation-delay: 0.6s;
+}
+
+.bubble:nth-of-type(7) .circle {
+  animation-delay: 0.7s;
+}
+
+.bubble:nth-of-type(8) .circle {
+  animation-delay: 0.8s;
+}
+
+.bubble:nth-of-type(9) .circle {
+  animation-delay: 0.9s;
+}
+
+.bubble:nth-of-type(10) .circle {
+  animation-delay: 1s;
+}
+
+.bubble .circle {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #fff;
+  animation: pulse 1.5s infinite;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(0.4);
+    opacity: 0.75;
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}

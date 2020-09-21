@@ -14,6 +14,7 @@ dropDefault.style.display = 'none';
 
 // Получаем данные
 let data = [];
+
 const getData = () => {
 	return fetch('./db_cities.json')
 		.then(response => {
