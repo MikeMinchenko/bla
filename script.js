@@ -103,10 +103,10 @@ window.addEventListener('DOMContentLoaded', () => {
 			});
 		};
 
-		if (selectCurrent.textContent !== 'Список фильмов') {
-			addCardFun(newData);
-		} else {
+		if (selectCurrent.textContent === 'Список фильмов' || selectCurrent.textContent === 'Все фильмы') {
 			addCardFun(data);
+		} else {
+			addCardFun(newData);
 		}
 		showCard(data);
 	};
@@ -177,6 +177,12 @@ window.addEventListener('DOMContentLoaded', () => {
             `
 			);
 		});
+		selectBody.insertAdjacentHTML(
+			'afterbegin',
+			`
+                <div class="select__item">Все фильмы</div>
+            `
+		);
 	};
 
 	// функция закрытия карточки
