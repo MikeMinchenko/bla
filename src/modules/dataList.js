@@ -4,7 +4,7 @@ const dataList = () => {
 		listHeader = document.querySelector('.popup-repair-types-content__head-title'),
 		navList = document.querySelector('.nav-list-popup-repair');
 
-	const getData = () => fetch('../../db/db.json');
+	const getData = () => fetch('./db/db.json');
 
 	const renderDefault = data => {
 			data.forEach((item, index) => {
@@ -58,20 +58,22 @@ const dataList = () => {
 	navList.addEventListener('click', event => {
 		const target = event.target.closest('button');
 
-		navList.querySelector('.active').classList.remove('active');
-		target.classList.add('active');
-		getData()
-			.then(response => {
-				if (response.status !== 200) {
-					throw new Error(`Status ${response.status}`);
-				}
+		if (target) {
+			navList.querySelector('.active').classList.remove('active');
+			target.classList.add('active');
+			getData()
+				.then(response => {
+					if (response.status !== 200) {
+						throw new Error(`Status ${response.status}`);
+					}
 
-				return response.json();
-			})
-			.then(data => {
-				renderActive(data);
-			})
-			.catch(error => console.error(error));
+					return response.json();
+				})
+				.then(data => {
+					renderActive(data);
+				})
+				.catch(error => console.error(error));
+		}
 	});
 
 	getData()
