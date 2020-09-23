@@ -1,5 +1,5 @@
 {
-  "name": "JS_Glo",
+  "name": "diplom_insein",
   "version": "1.0.0",
   "description": "",
   "scripts": {
@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/from0toweb/JS_Glo.git"
+    "url": "git+https://github.com/MikeMinchenko/JS_Glo.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/from0toweb/JS_Glo/issues"
+    "url": "https://github.com/MikeMinchenko/JS_Glo/issues"
   },
-  "homepage": "https://github.com/from0toweb/JS_Glo#readme",
+  "homepage": "https://github.com/MikeMinchenko/JS_Glo#readme",
   "devDependencies": {
     "@babel/core": "^7.11.6",
     "@babel/preset-env": "^7.11.5",
