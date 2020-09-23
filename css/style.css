@@ -9593,3 +9593,7 @@ strong {
   -webkit-transform: rotate(180deg);
   transform: rotate(180deg);
 }
+
+.popup-repair-types-nav__item.active {
+  background-color: rgba(228, 156, 63, 0.466);
+}
