@@ -8,6 +8,7 @@ import dataList from './modules/dataList.js';
 import formValidate from './modules/formValidate.js';
 import sendForm from './modules/sendForm.js';
 import partnersSlider from './modules/partnersSlider.js';
+import clientReviewsSlider from './modules/clientReviewsSlider.js';
 
 togglePhone();
 togglePopups();
@@ -22,3 +23,4 @@ sendForm();
 
 // слайдеры
 partnersSlider();
+clientReviewsSlider();
