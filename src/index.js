@@ -5,6 +5,8 @@ import maskPhone from './modules/maskPhone.js';
 import itemPopup from './modules/itemPopup.js';
 import accordion from './modules/accordion.js';
 import dataList from './modules/dataList.js';
+import formValidate from './modules/formValidate.js';
+import sendForm from './modules/sendForm.js';
 
 togglePhone();
 togglePopups();
@@ -14,3 +16,5 @@ itemPopup('.formula-item');
 itemPopup('.problems-item');
 accordion();
 dataList();
+formValidate();
+sendForm();
