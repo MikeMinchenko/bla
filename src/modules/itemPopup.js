@@ -1,25 +1,30 @@
 const itemPopup = item => {
+	document.querySelectorAll('.active-item').forEach(item => item.classList.remove('active-item'));
+
 	document.addEventListener('mouseover', event => {
-		const target = event.target.closest(item);
+		const elemTarget = event.target.closest(item),
+			target = event.target.closest(`${item}__icon`);
 
 		if (target) {
-			target.classList.add('active-item');
-			if (target.querySelector(`${item}-popup`).getBoundingClientRect().top < 0) {
-				target.querySelector(`${item}-popup`).classList.add('popup-transform');
-				target.querySelector(`${item}-popup`).style.top = `${target.offsetHeight + 10}px`;
-				target.style.zIndex = `1`;
+			elemTarget.classList.add('active-item');
+
+			if (elemTarget.querySelector(`${item}-popup`).getBoundingClientRect().top < 0) {
+				elemTarget.querySelector(`${item}-popup`).classList.add('popup-transform');
+				elemTarget.querySelector(`${item}-popup`).style.top = `${elemTarget.offsetHeight + 10}px`;
+				elemTarget.style.zIndex = `1`;
 			}
 		}
 	});
 
 	document.addEventListener('mouseout', event => {
-		const target = event.target.closest(item);
+		const elemTarget = event.target.closest(item),
+			target = event.target.closest(`${item}__icon`);
 
 		if (target) {
-			target.classList.remove('active-item');
-			target.querySelector(`${item}-popup`).classList.remove('popup-transform');
-			target.querySelector(`${item}-popup`).removeAttribute('style');
-			target.removeAttribute('style');
+			elemTarget.classList.remove('active-item');
+			elemTarget.querySelector(`${item}-popup`).classList.remove('popup-transform');
+			elemTarget.querySelector(`${item}-popup`).removeAttribute('style');
+			elemTarget.removeAttribute('style');
 		}
 	});
 };

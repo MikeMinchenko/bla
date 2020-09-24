@@ -9,6 +9,15 @@ import formValidate from './modules/formValidate.js';
 import sendForm from './modules/sendForm.js';
 import partnersSlider from './modules/partnersSlider.js';
 import clientReviewsSlider from './modules/clientReviewsSlider.js';
+import designSliderTabs from './modules/designSliderTabs.js';
+import designSliderPopup from './modules/designSliderPopup.js';
+import designSliderContent from './modules/designSliderContent.js';
+import schemeSliderTabs from './modules/schemeSliderTabs.js';
+import schemeSliderContent from './modules/schemeSliderContent.js';
+import toggleTransparency from './modules/toggleTransparency.js';
+import transparencySlider from './modules/transparencySlider.js';
+import formulaSlider from './modules/formulaSlider.js';
+import problemsSlider from './modules/problemsSlider.js';
 
 togglePhone();
 togglePopups();
@@ -24,3 +33,12 @@ sendForm();
 // слайдеры
 partnersSlider();
 clientReviewsSlider();
+designSliderTabs();
+designSliderPopup();
+designSliderContent();
+schemeSliderTabs();
+schemeSliderContent();
+toggleTransparency();
+transparencySlider();
+formulaSlider();
+problemsSlider();

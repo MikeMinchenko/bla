@@ -1140,7 +1140,6 @@ template,
   content: "";
   top: 0;
   left: 0;
-  z-index: 10;
 }
 
 .formula-slider__slide .formula-item {
@@ -8576,7 +8575,6 @@ div.wave-block:nth-child(17):after {
 }
 
 .active-item {
-  font-size: 20px;
   opacity: 1;
 }
 
