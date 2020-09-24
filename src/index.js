@@ -7,6 +7,7 @@ import accordion from './modules/accordion.js';
 import dataList from './modules/dataList.js';
 import formValidate from './modules/formValidate.js';
 import sendForm from './modules/sendForm.js';
+import partnersSlider from './modules/partnersSlider.js';
 
 togglePhone();
 togglePopups();
@@ -18,3 +19,6 @@ accordion();
 dataList();
 formValidate();
 sendForm();
+
+// слайдеры
+partnersSlider();
