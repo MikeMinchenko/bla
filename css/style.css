@@ -9631,6 +9631,7 @@ strong {
   #feedback5>.status-message,
   #feedback4>.status-message {
     bottom: 99px;
+    font-size: 14px;
   }
 }
 
