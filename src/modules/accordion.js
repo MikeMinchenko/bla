@@ -6,12 +6,11 @@ const accordion = () => {
 		const target = event.target.closest('li');
 
 		accordionLi.forEach(item => {
-			if (item.querySelector('.title_block').matches('.msg-active')) {
+			if (item.querySelector('.title_block').matches('.msg-active') && item !== target) {
 				item.querySelector('.title_block').classList.remove('msg-active');
 			}
+			target.querySelector('.title_block').classList.toggle('msg-active');
 		});
-
-		target.querySelector('.title_block').classList.add('msg-active');
 	});
 };
 

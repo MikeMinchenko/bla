@@ -7,5 +7,3 @@ const prevFun = function(value) {
 };
 
 export default prevFun;
-// const prev = prevFun.bind(this);
-// prev();

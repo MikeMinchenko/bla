@@ -1,14 +1,17 @@
 // полифилы
-import 'nodelist-foreach-polyfill';
-import '@babel/polyfill';
-import 'mdn-polyfills/Node.prototype.append';
-import 'mdn-polyfills/Node.prototype.remove';
-import 'cross-fetch/polyfill';
-import 'formdata-polyfill';
-import elementClosest from 'element-closest';
-elementClosest(window);
-import smoothscroll from 'smoothscroll-polyfill';
-smoothscroll.polyfill();
+// import 'dom-node-polyfills';
+// import 'nodelist-foreach-polyfill';
+// import '@babel/polyfill';
+// import 'mdn-polyfills/Node.prototype.append';
+// import 'mdn-polyfills/Node.prototype.remove';
+// import 'mdn-polyfills/Node.prototype.children';
+// import 'mdn-polyfills/Function.prototype.bind';
+// import 'cross-fetch/polyfill';
+// import 'formdata-polyfill';
+// import elementClosest from 'element-closest';
+// elementClosest(window);
+// import smoothscroll from 'smoothscroll-polyfill';
+// smoothscroll.polyfill();
 
 // импорт модулей
 import togglePhone from './modules/togglePhone.js';

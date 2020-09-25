@@ -7,5 +7,3 @@ const nextFun = function(value) {
 };
 
 export default nextFun;
-// const next = nextFun.bind(this);
-// next();

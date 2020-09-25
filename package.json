@@ -32,6 +32,7 @@
     "@babel/polyfill": "^7.11.5",
     "autoprefixer": "^10.0.0",
     "cross-fetch": "^3.0.6",
+    "dom-node-polyfills": "^1.0.0",
     "element-closest": "^3.0.2",
     "fetch-polyfill": "^0.8.2",
     "formdata-polyfill": "^3.0.20",
