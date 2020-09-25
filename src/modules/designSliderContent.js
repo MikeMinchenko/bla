@@ -1,4 +1,6 @@
 import CarouselSlider from './carouselSlider.js';
+import nextFun from './nextFun.js';
+import prevFun from './prevFun.js';
 
 const designSliderContent = () => {
 	const buttons = document.querySelectorAll('#designs-list .designs-nav__item'),
@@ -94,22 +96,16 @@ const designSliderContent = () => {
 
 	mobileSlider.prevSlider = function() {
 		if (this.options.position > 0) {
-			--this.options.position;
-			this.wrap.style.transform = `translateX(-${this.options.position *
-				(this.options.widthSlide / this.slides.length)}%)`;
-			this.next.style.visibility = '';
-			if (this.options.position === 0) this.prev.style.visibility = 'hidden';
+			const prev = prevFun.bind(this);
+			prev(true);
 			current.textContent = this.options.position + 1;
 		}
 	};
 
 	mobileSlider.nextSlider = function() {
 		if (this.options.position < this.options.maxPosition) {
-			++this.options.position;
-			this.wrap.style.transform = `translateX(-${this.options.position *
-				(this.options.widthSlide / this.slides.length)}%)`;
-			this.prev.style.visibility = '';
-			if (this.options.position === this.options.maxPosition) this.next.style.visibility = 'hidden';
+			const next = nextFun.bind(this);
+			next(true);
 			current.textContent = this.options.position + 1;
 		}
 	};
@@ -128,11 +124,13 @@ const designSliderContent = () => {
 
 		total.textContent = this.slides.length;
 
-		if (this.options.position === this.options.maxPosition) this.next.style.visibility = 'hidden';
-		else this.next.style.visibility = 'visible';
+		this.options.position === this.options.maxPosition
+			? (this.next.style.visibility = 'hidden')
+			: (this.next.style.visibility = 'visible');
 
-		if (this.options.position === 0) this.prev.style.visibility = 'hidden';
-		else this.prev.style.visibility = 'visible';
+		this.options.position === 0
+			? (this.prev.style.visibility = 'hidden')
+			: (this.prev.style.visibility = 'visible');
 
 		current.textContent = 1;
 	};

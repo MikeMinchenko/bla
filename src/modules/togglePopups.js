@@ -21,6 +21,10 @@ const togglePopups = () => {
 		if (target.matches('.button_wide')) popupConsultation.style.visibility = `visible`;
 		if (target.matches('.link-list-designs a')) popupDesign.style.visibility = `visible`;
 		if (target.matches('.popup') || target.matches('.close')) target.closest('.popup').style.visibility = `hidden`;
+		if (window.getComputedStyle(document.querySelector('.popup-transparency')).visibility === 'hidden') {
+			document.querySelector('#transparency_left').style.visibility = 'hidden';
+			document.querySelector('#transparency_right').style.visibility = 'hidden';
+		}
 	});
 };
 

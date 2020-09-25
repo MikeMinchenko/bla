@@ -1,4 +1,6 @@
 import CarouselSlider from './carouselSlider.js';
+import nextFun from './nextFun.js';
+import prevFun from './prevFun.js';
 
 const designSliderPopup = () => {
 	const buttonHolder = document.querySelector('#nav-list-popup-designs'),
@@ -173,22 +175,16 @@ const designSliderPopup = () => {
 
 	innerSlider.prevSlider = function() {
 		if (this.options.position > 0) {
-			--this.options.position;
-			this.wrap.style.transform = `translateX(-${this.options.position *
-				(this.options.widthSlide / this.slides.length)}%)`;
-			this.next.style.visibility = '';
-			if (this.options.position === 0) this.prev.style.visibility = 'hidden';
+			const prev = prevFun.bind(this);
+			prev(true);
 			current.textContent = this.options.position + 1;
 		}
 	};
 
 	innerSlider.nextSlider = function() {
 		if (this.options.position < this.options.maxPosition) {
-			++this.options.position;
-			this.wrap.style.transform = `translateX(-${this.options.position *
-				(this.options.widthSlide / this.slides.length)}%)`;
-			this.prev.style.visibility = '';
-			if (this.options.position === this.options.maxPosition) this.next.style.visibility = 'hidden';
+			const next = nextFun.bind(this);
+			next(true);
 			current.textContent = this.options.position + 1;
 		}
 	};

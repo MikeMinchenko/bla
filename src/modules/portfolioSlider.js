@@ -1,4 +1,6 @@
 import CarouselSlider from './carouselSlider.js';
+import nextFun from './nextFun.js';
+import prevFun from './prevFun.js';
 
 const portfolioSlider = () => {
 	const desktopSlider = new CarouselSlider({
@@ -135,20 +137,16 @@ const portfolioSlider = () => {
 
 	mobileSlider.prevSlider = function() {
 		if (this.options.position > 0) {
-			--this.options.position;
-			this.wrap.style.transform = `translateX(-${this.options.position * this.options.widthSlide}%)`;
-			this.next.style.visibility = '';
-			if (this.options.position === 0) this.prev.style.visibility = 'hidden';
+			const prev = prevFun.bind(this);
+			prev();
 			current.textContent = this.options.position + 1;
 		}
 	};
 
 	mobileSlider.nextSlider = function() {
 		if (this.options.position < this.options.maxPosition) {
-			++this.options.position;
-			this.wrap.style.transform = `translateX(-${this.options.position * this.options.widthSlide}%)`;
-			this.prev.style.visibility = '';
-			if (this.options.position === this.options.maxPosition) this.next.style.visibility = 'hidden';
+			const next = nextFun.bind(this);
+			next();
 			current.textContent = this.options.position + 1;
 		}
 	};
