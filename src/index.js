@@ -1,3 +1,16 @@
+// полифилы
+// import 'nodelist-foreach-polyfill';
+// import '@babel/polyfill';
+// import 'mdn-polyfills/Node.prototype.append';
+// import 'mdn-polyfills/Node.prototype.remove';
+// import 'cross-fetch/polyfill';
+// import 'formdata-polyfill';
+// import elementClosest from 'element-closest';
+// elementClosest(window);
+// import smoothscroll from 'smoothscroll-polyfill';
+// smoothscroll.polyfill();
+
+// импорт модулей
 import togglePhone from './modules/togglePhone.js';
 import togglePopups from './modules/togglePopups.js';
 import smoothScroll from './modules/smoothScroll.js';
@@ -18,6 +31,8 @@ import toggleTransparency from './modules/toggleTransparency.js';
 import transparencySlider from './modules/transparencySlider.js';
 import formulaSlider from './modules/formulaSlider.js';
 import problemsSlider from './modules/problemsSlider.js';
+import portfolioSlider from './modules/portfolioSlider.js';
+import togglePortfolioPopup from './modules/togglePortfolioPopup.js';
 
 togglePhone();
 togglePopups();
@@ -42,3 +57,5 @@ toggleTransparency();
 transparencySlider();
 formulaSlider();
 problemsSlider();
+portfolioSlider();
+togglePortfolioPopup();
