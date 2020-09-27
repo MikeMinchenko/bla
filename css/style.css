@@ -8337,6 +8337,9 @@ div.wave-block:nth-child(17):after {
   background: transparent;
   color: #322823;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (max-width: 1024px) {
@@ -8356,9 +8359,8 @@ div.wave-block:nth-child(17):after {
   }
 }
 
-.button-footer a {
+.button-footer {
   font-size: 18px;
-  display: block;
   color: #322823;
 }
 

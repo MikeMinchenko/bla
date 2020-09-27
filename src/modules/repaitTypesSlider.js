@@ -13,7 +13,7 @@ const repaitTypesSlider = () => {
 			wrap: `.types-repair1`,
 			prev: '#repair-types-arrow_left',
 			next: '#repair-types-arrow_right',
-			stylesId: `js-types-repair$1-slider`,
+			stylesId: `js-types-repair1-slider`,
 			slidesToShow: 1,
 			styleClasses: {
 				main: `js-types-repair1-main-slider`,
@@ -99,12 +99,12 @@ const repaitTypesSlider = () => {
 
 	slider.update = function({ wrap, stylesId, wrapClass, itemClass }) {
 		const oldStyles = document.getElementById(this.stylesId);
+
 		oldStyles.remove();
 		const classNames = this.options.styleClasses;
 		this.wrap.style.transform = '';
 		this.wrap.classList.remove(classNames.wrap);
 		this.slides.forEach(slide => slide.classList.remove(classNames.item));
-
 		this.wrap = document.querySelector(wrap);
 		this.stylesId = stylesId;
 		this.slides = [ ...this.wrap.children ];
@@ -148,18 +148,19 @@ const repaitTypesSlider = () => {
 
 	buttons.forEach((item, index) =>
 		item.addEventListener('click', () => {
-			for (let i = 0; i < slidesBlocks.length; i += 1) {
+			const slidesArr = [ ...slidesBlocks ];
+			for (let i = 0; i < slidesArr.length; i += 1) {
 				if (index !== i) {
-					slidesBlocks[i].style.display = 'none';
+					slidesArr[i].style.display = 'none';
 					buttons[i].classList.remove('active');
 				} else {
-					slidesBlocks[i].style.display = '';
+					slidesArr[i].style.display = '';
 					buttons[i].classList.add('active');
 					slider.update({
-						wrap: `.${slidesBlocks[i].classList.value}`,
-						wrapClass: `js-${slidesBlocks[i].classList.value}-wrap-slider`,
-						itemClass: `js-${slidesBlocks[i].classList.value}__item-slider`,
-						stylesId: `js-${slidesBlocks[i].classList.value}-slider`
+						wrap: `.${slidesArr[i].classList[0]}`,
+						wrapClass: `js-${slidesArr[i].classList[0]}-wrap-slider`,
+						itemClass: `js-${slidesArr[i].classList[0]}__item-slider`,
+						stylesId: `js-${slidesArr[i].classList[0]}-slider`
 					});
 				}
 			}

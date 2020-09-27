@@ -1,6 +1,7 @@
 const sendForm = () => {
 	const wrongMessage = 'Что-то пошло не так',
 		popupThank = document.querySelector('.popup-thank'),
+		popupConsultation = document.querySelector('.popup-consultation'),
 		sendData = body =>
 			fetch('./server.php', {
 				method: 'POST',
@@ -58,6 +59,7 @@ const sendForm = () => {
 				}
 				statusMessage.textContent = ``;
 				statusMessage.innerHTML = '';
+				if (target.closest('.popup-consultation')) popupConsultation.style.visibility = 'hidden';
 				popupThank.style.visibility = `visible`;
 				target.reset();
 			})
