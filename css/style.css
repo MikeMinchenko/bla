@@ -3680,9 +3680,28 @@ div.wave-block:nth-child(17):after {
 .designs-slider__style-slide img {
   display: block;
   height: 100%;
-  -o-object-fit: contain;
-  object-fit: contain;
+  width: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
 }
+
+.popup-design-slider__style-slide img {
+  display: block;
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+.popup-design-slider__style-slide {
+  height: 100%;
+}
+
+.popup-design-slider {
+  height: 100%;
+}
+
+
 
 .preview-block {
   position: absolute;
@@ -8237,7 +8256,8 @@ div.wave-block:nth-child(17):after {
 .button_o svg {
   position: absolute;
   top: 0;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: -1;
 }
 

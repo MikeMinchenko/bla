@@ -3,23 +3,50 @@ import nextFun from './nextFun.js';
 import prevFun from './prevFun.js';
 
 const designSliderContent = () => {
-	const buttons = document.querySelectorAll('#designs-list .designs-nav__item'),
-		buttonHolder = document.querySelector('#designs-list');
+	const buttons = document.querySelectorAll('.designs-nav__item_base'),
+		slidesBlocks = document.querySelector('.designs-slider').children,
+		total = document.querySelector('#designs-counter .slider-counter-content__total'),
+		current = document.querySelector('#designs-counter .slider-counter-content__current'),
+		// основной слайдер
+		slider = new CarouselSlider({
+			main: '.designs-slider',
+			wrap: `.designs-slider__style1.design-id`,
+			prev: '#design_left',
+			next: '#design_right',
+			stylesId: `js-designs-slider__style1-slider`,
+			slidesToShow: 1,
+			styleClasses: {
+				main: `js-designs-slider__style1-main-slider`,
+				wrap: `js-designs-slider__style1-wrap-slider`,
+				item: `js-designs-slider__style1__item-slider`
+			}
+		}),
+		// слайдер табов
+		buttonSlider = new CarouselSlider({
+			main: '.nav.nav-designs',
+			wrap: '.nav-list.nav-list-designs',
+			prev: '#nav-arrow-designs_left',
+			next: '#nav-arrow-designs_right',
+			stylesId: 'js-nav-designs-slider-style',
+			slidesToShow: 3,
+			styleClasses: {
+				main: 'js-nav-designs-main-slider',
+				wrap: 'js-nav-designs-wrap-slider',
+				item: 'js-nav-designs__item-slider'
+			},
+			responsive: [
+				{
+					breakpoint: 769,
+					slideToShow: 2
+				},
+				{
+					breakpoint: 576,
+					slideToShow: 1
+				}
+			]
+		});
 
-	const slider = new CarouselSlider({
-		buttons: false,
-		main: '.designs-slider',
-		wrap: '.wrapper-for-design-slider',
-		stylesId: 'js-designs-slider-wrap-style',
-		styleClasses: {
-			main: 'js-designs-slider-main-slider',
-			wrap: 'js-designs-slider-wrap-slider',
-			item: 'js-designs-slider__item-slider'
-		},
-		slidesToShow: 1
-	});
-
-	slider.addStyle = function() {
+	buttonSlider.addStyle = function() {
 		let style = document.getElementById(this.stylesId);
 		const styleClasses = this.options.styleClasses;
 
@@ -29,94 +56,58 @@ const designSliderContent = () => {
 		}
 
 		style.textContent = `
-			.${styleClasses.main} {
-				overflow: hidden !important;
+			@media (max-width: 1135px) {
+				.${styleClasses.main} {
+					overflow: hidden !important;
+				}
+
+				.${styleClasses.wrap} {
+					display: flex !important;
+					transition: transform 0.5s !important;
+					flex-wrap: nowrap;
+				}
+
+				.${styleClasses.item} {
+					display: flex !important;
+					align-items: center !important;
+					flex-direction: column;
+					justify-content: center !important;
+
+					flex: 0 0 ${this.options.widthSlide}% !important;
+				}
+
+				.nav-list-designs {
+					min-width: 100%;
+				}
 			}
 
-			.${styleClasses.wrap} {
-				display: flex !important;
-        display: -ms-flexbox !important;
-				flex-direction: column !important;
-				-ms-flex-direction: column !important;
-				transition: transform 0.5s !important;
-			}
-
-			.${styleClasses.item} {
-				display: flex !important;
-				margin: 0 auto !important;
-				flex: 0 0 ${this.options.widthSlide}% !important;
-				height: 100%;
-				transition: 0.5s;
-			}
-			.js-designs-slider-wrap-slider {
-				overflow: visible;
+			@media (min-width: 1135px) {
+				.${styleClasses.wrap} {
+					transform: translateX(-0%) !important;
+				}
 			}
 		`;
 
 		document.head.append(style);
 	};
 
-	slider.previewBlocks = document.querySelectorAll('#designs .preview-block');
+	buttonSlider.init();
 
-	slider.toggleContent = function(index) {
-		this.slides.forEach((slide, i) => {
-			if (i === index) {
-				this.previewBlocks[i].classList.add('visible');
-				this.wrap.style.transform = `translateY(-${this.options.widthSlide / 5 * i}%)`;
-			} else {
-				this.previewBlocks[i].classList.remove('visible');
-			}
-		});
-	};
+	total.textContent = slider.slides.length;
 
-	slider.init();
+	slider.update = function({ wrap, stylesId, wrapClass, itemClass }) {
+		const oldStyles = document.getElementById(this.stylesId);
 
-	const current = document.querySelector('#designs-counter .slider-counter-content__current'),
-		total = document.querySelector('#designs-counter .slider-counter-content__total');
-
-	const allSliders = document.querySelectorAll('.js-designs-slider__item-slider');
-
-	const mobileSlider = new CarouselSlider({
-		main: '.nav.nav-designs',
-		wrap: '.designs-slider__style1',
-		prev: '#design_left',
-		next: '#design_right',
-		stylesId: 'js-designs-slider__style1-styles',
-		styleClasses: {
-			main: 'js-nav-designs-item--main--slider',
-			wrap: 'js-nav-designs-item-wrap-slider',
-			item: 'js-nav-designs-item__item-slider'
-		},
-		slidesToShow: 1
-	});
-
-	total.textContent = mobileSlider.slides.length;
-
-	mobileSlider.addStyle = function() {};
-
-	mobileSlider.prevSlider = function() {
-		if (this.options.position > 0) {
-			const prev = prevFun.bind(this);
-			prev(true);
-			current.textContent = this.options.position + 1;
-		}
-	};
-
-	mobileSlider.nextSlider = function() {
-		if (this.options.position < this.options.maxPosition) {
-			const next = nextFun.bind(this);
-			next(true);
-			current.textContent = this.options.position + 1;
-		}
-	};
-
-	mobileSlider.update = function({ wrap }) {
+		oldStyles.remove();
 		const classNames = this.options.styleClasses;
 		this.wrap.style.transform = '';
 		this.wrap.classList.remove(classNames.wrap);
 		this.slides.forEach(slide => slide.classList.remove(classNames.item));
-
-		(this.wrap = document.querySelector('.' + wrap)), (this.slides = [ ...this.wrap.children ]);
+		this.wrap = document.querySelector(wrap);
+		this.stylesId = stylesId;
+		this.slides = [ ...this.wrap.children ];
+		this.options.styleClasses.wrap = wrapClass;
+		this.options.styleClasses.item = itemClass;
 		this.options.maxPosition = this.slides.length - this.slidesToShow;
 		this.options.position = 0;
 
@@ -132,46 +123,70 @@ const designSliderContent = () => {
 			? (this.prev.style.visibility = 'hidden')
 			: (this.prev.style.visibility = 'visible');
 
-		current.textContent = 1;
+		current.textContent = this.options.position + 1;
 	};
 
-	mobileSlider.init();
+	slider.prevSlider = function() {
+		if (this.options.position > 0) {
+			const prev = prevFun.bind(this);
+			prev();
+			current.textContent = this.options.position + 1;
+		}
+	};
 
-	buttonHolder.addEventListener('click', event => {
-		const target = event.target.closest('#designs .designs-nav__item');
-		if (!target) return;
+	slider.nextSlider = function() {
+		if (this.options.position < this.options.maxPosition) {
+			const next = nextFun.bind(this);
+			next();
+			current.textContent = this.options.position + 1;
+		}
+	};
 
-		buttons.forEach((button, index) => {
-			if (button === target) {
-				slider.toggleContent(index);
-				button.classList.add('active');
-				const wrap = allSliders[index].classList[0];
+	slider.init();
 
-				mobileSlider.update({ wrap });
-			} else button.classList.remove('active');
-		});
-	});
+	const paginations = document.querySelectorAll('.preview-block');
+
+	buttons.forEach((item, index) =>
+		item.addEventListener('click', () => {
+			const slidesArr = [ ...slidesBlocks ];
+			for (let i = 0; i < slidesArr.length; i += 1) {
+				if (index !== i) {
+					slidesArr[i].style.display = 'none';
+					slidesArr[i].classList.remove('design-id');
+					buttons[i].classList.remove('active');
+					paginations[i].classList.remove('visible');
+				} else {
+					slidesArr[i].style.display = '';
+					slidesArr[i].classList.add('design-id');
+					buttons[i].classList.add('active');
+					paginations[i].classList.add('visible');
+					slider.update({
+						wrap: `.${slidesArr[i].classList[0]}.design-id`,
+						wrapClass: `js-${slidesArr[i].classList[0]}-wrap-slider`,
+						itemClass: `js-${slidesArr[i].classList[0]}__item-slider`,
+						stylesId: `js-${slidesArr[i].classList[0]}-slider`
+					});
+				}
+			}
+		})
+	);
 
 	// пагинация
-	const designs = document.querySelector('#designs'),
-		sliders = document.querySelectorAll('.js-designs-slider__item-slider'),
-		paginations = document.querySelectorAll('.preview-block');
+	const designs = document.querySelector('#designs');
 
 	designs.addEventListener('click', event => {
-		const target = event.target.closest('.preview-block__item');
+		const slider = document.querySelector('.design-id'),
+			target = event.target.closest('.preview-block__item');
+
 		if (!target) return;
 		const paginationHolder = target.closest('.preview-block');
-
-		paginations.forEach((item, index) => {
+		paginations.forEach(item => {
 			if (item === paginationHolder) {
 				item = [ ...item.children ];
-
 				item.forEach((block, i) => {
 					if (block === target) {
 						block.querySelector('.preview-block__item-inner').classList.add('preview_active');
-						const slider = sliders[index];
-						const length = item.length;
-						slider.style.transform = `translateX(-${100 / length * i}%)`;
+						slider.style.transform = `translateX(-${100 * i}%)`;
 						current.textContent = i;
 					} else {
 						block.querySelector('.preview-block__item-inner').classList.remove('preview_active');

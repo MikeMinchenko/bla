@@ -102,6 +102,7 @@ export default class CarouselSlider {
 			.${styleClasses.wrap} {
 				display: flex !important;
 				transition: transform 0.5s !important;
+				height: 100%
 			}
 
 			.${styleClasses.item} {

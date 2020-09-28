@@ -75,9 +75,7 @@ const repaitTypesSlider = () => {
 
 					flex: 0 0 ${this.options.widthSlide}% !important;
 				}
-				 .${styleClasses.item} svg {
-				 	left: unset;
-				 }
+
 				.nav-list-repair {
 					min-width: 100%;
 				}

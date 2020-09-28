@@ -1,17 +1,17 @@
 // полифилы
-// import 'dom-node-polyfills';
-// import 'nodelist-foreach-polyfill';
-// import '@babel/polyfill';
-// import 'mdn-polyfills/Node.prototype.append';
-// import 'mdn-polyfills/Node.prototype.remove';
-// import 'mdn-polyfills/Node.prototype.children';
-// import 'mdn-polyfills/Function.prototype.bind';
-// import 'cross-fetch/polyfill';
-// import 'formdata-polyfill';
-// import elementClosest from 'element-closest';
-// elementClosest(window);
-// import smoothscroll from 'smoothscroll-polyfill';
-// smoothscroll.polyfill();
+import 'dom-node-polyfills';
+import 'nodelist-foreach-polyfill';
+import '@babel/polyfill';
+import 'mdn-polyfills/Node.prototype.append';
+import 'mdn-polyfills/Node.prototype.remove';
+import 'mdn-polyfills/Node.prototype.children';
+import 'mdn-polyfills/Function.prototype.bind';
+import 'cross-fetch/polyfill';
+import 'formdata-polyfill';
+import elementClosest from 'element-closest';
+elementClosest(window);
+import smoothscroll from 'smoothscroll-polyfill';
+smoothscroll.polyfill();
 
 // импорт модулей
 import togglePhone from './modules/togglePhone.js';
@@ -25,9 +25,8 @@ import formValidate from './modules/formValidate.js';
 import sendForm from './modules/sendForm.js';
 import partnersSlider from './modules/partnersSlider.js';
 import clientReviewsSlider from './modules/clientReviewsSlider.js';
-import designSliderTabs from './modules/designSliderTabs.js';
-import designSliderPopup from './modules/designSliderPopup.js';
 import designSliderContent from './modules/designSliderContent.js';
+import designSliderPopup from './modules/designSliderPopup.js';
 import schemeSliderTabs from './modules/schemeSliderTabs.js';
 import schemeSliderContent from './modules/schemeSliderContent.js';
 import toggleTransparency from './modules/toggleTransparency.js';
@@ -52,9 +51,9 @@ sendForm();
 // слайдеры
 partnersSlider();
 clientReviewsSlider();
-designSliderTabs();
-designSliderPopup();
+
 designSliderContent();
+designSliderPopup();
 schemeSliderTabs();
 schemeSliderContent();
 toggleTransparency();
